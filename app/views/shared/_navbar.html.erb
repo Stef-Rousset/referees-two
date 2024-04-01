@@ -1,31 +1,25 @@
 <navbar class=" flex justify-between bg-white w-screen h-10vh">
     <div class="flex items-center justify-start">
       <%= image_tag "nav_image.jpg", class: "w-12 h-12 mr-4" %>
-      <%= link_to "Accueil", root_path, class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
-      <%= link_to "Ressources", ressources_path, class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
-      <%= mail_to "contact@escrime-qcm-arbitrage.com", "Contact", class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
+      <%= link_to "Accueil", root_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+      <%= link_to "Ressources", ressources_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+      <%= mail_to "contact@escrime-qcm-arbitrage.com", "Contact", class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul id="login-signup" class="navbar-nav me-auto">
         <% if user_signed_in? && (current_user.admin? || current_user.contributor?) %>
-            <!-- <li class="nav-item dropdown"> -->
-              <%#= image_tag "halte.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-              <!-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> -->
-                <%= link_to "Ajouter une question", new_question_path, class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
-                <%= link_to "Voir mes questions", dashboard_path, class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
-                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
-             <!--  </div> -->
-            <!-- </li> -->
+          <%= link_to "Ajouter une question", new_question_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+          <%= link_to "Voir mes questions", dashboard_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
+            <%= link_to "Login", new_user_session_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Signup", new_user_registration_path, class: "text-darkblue text-xl hover:text-gray-600 hover:font-semibold mr-4" %>
+            <%= link_to "Signup", new_user_registration_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
           </li>
         <% end %>
       </ul>

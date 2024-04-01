@@ -1,34 +1,30 @@
 <% content_for :meta_title, "Arbitre d'escrime - Accueil" %>
 <% content_for :meta_description, "Bienvenue sur le site d'entraînement au QCM d'arbitrage à l'escrime" %>
-<div class="home-container" role="main">
-  <div class="home-text">
-    <div class="home-text-welcome">
-      <p>
-      L'objectif de ce site est de vous permettre de vous entraîner au qcm d'arbitrage,
-      première étape pour entrer en formation d'arbitre départemental ou régional.<br>
-      Nous vous conseillons vivement de lire au préalable les différents documents disponibles
-      dans la rubrique <%= link_to "Ressources", ressources_path %>.<br>
-      Vous avez la possibilité soit de sélectionner un type de questions, soit de passer un
-      qcm complet chronométré (20 min pour le départemental, 30 minutes pour le régional).<br>
-      <span>Bon entraînement !</span>
-      </p>
-      <div class="home-text-btns">
-        <button class="btn-blue select-questions"> Sélectionner des questions</button>
-        <button class="btn-blue complete-qcm"> QCM complet chronométré</button>
-      </div>
-    </div>
-    <!-- au clic sur selectionner des questions -->
-    <div class="filters-questions hide-element">
-      <h2>Choix du type de questions</h2>
-
-
-    </div>
-    <!-- au clic sur qcm complet -->
-    <div class="filters-questions-qcm hide-element">
-      <h2>Choix du type de QCM</h2>
-
-
+<section data-controller="homepage-btns" class="w-8/12 mx-auto my-10">
+  <div data-homepage-btns-target="paragraph" class="flex flex-col w-full text-lg text-justify">
+    <p>L'objectif de ce site est de vous permettre de vous entraîner au qcm d'arbitrage,
+    première étape pour entrer en formation d'arbitre départemental ou régional.</p>
+    <p class="my-4">Nous vous conseillons vivement de lire au préalable les différents documents disponibles
+    dans la rubrique <%= link_to "Ressources", ressources_path, class: "italic hover:font-semibold" %>.</p>
+    <p>Vous avez la possibilité soit de sélectionner un type de questions, soit de passer un
+    qcm complet chronométré (20 min pour le départemental, 30 minutes pour le régional).</p>
+    <p class="italic my-4">Bon entraînement !</p>
+    <div class="flex justify-around my-10">
+      <button data-homepage-btns-target="questions" data-action="click->homepage-btns#showQuestions" class="text-white bg-darkblue text-lg p-2 rounded"> Sélectionner des questions</button>
+      <button data-homepage-btns-target="qcm" data-action="click->homepage-btns#showQcm" class="text-white bg-darkblue text-lg p-2 rounded"> QCM complet chronométré</button>
     </div>
   </div>
-</div>
+  <!-- au clic sur selectionner des questions -->
+  <div data-homepage-btns-target="questionchoice" class="filters-questions hidden">
+    <h2>Choix du type de questions</h2>
+
+
+  </div>
+  <!-- au clic sur qcm complet -->
+  <div data-homepage-btns-target="qcmchoice" class="filters-questions-qcm hidden">
+    <h2>Choix du type de QCM</h2>
+
+
+  </div>
+</section>
 
