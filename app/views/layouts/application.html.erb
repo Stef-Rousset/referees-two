@@ -12,7 +12,9 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <%= render 'shared/navbar' %>
+    <main class="w-screen h-80vh overflow-scroll">
+      <%= render 'shared/banner' %>
       <%= render 'shared/flashes' %>
       <%= yield %>
     </main>
