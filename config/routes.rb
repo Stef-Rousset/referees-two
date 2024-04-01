@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: 'pages#home'
   get "/ressources", to: "pages#ressources"
+  get "qcm", to: "questions#qcm"
+  resources :questions
 end
