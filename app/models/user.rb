@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :questions
+  validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ }
+  validates :encrypted_password, presence: true
+
+  enum role: { normal: 0, contributor: 1, admin: 2 }
 end

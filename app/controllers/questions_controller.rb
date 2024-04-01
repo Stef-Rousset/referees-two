@@ -1,11 +1,12 @@
-#require 'will_paginate/array' #needed to work with arrays
+require 'will_paginate/array' #needed to work with arrays
 
 class QuestionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :qcm]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    @questions = policy_scope(Question).order(created_at: :desc)
+    #@questions = policy_scope(Question).order(created_at: :desc)
+    @questions = Question.all
     @questions = @questions.filter_by_level(params[:level]) if params[:level].present?
     @questions = @questions.filter_by_category(params[:category]) if params[:category].present?
     @count = @questions.length
