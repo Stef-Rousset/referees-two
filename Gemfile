@@ -36,6 +36,9 @@ gem "redis", "~> 4.0"
 # Authentification with devise [https://github.com/heartcombo/devise]
 gem "devise"
 
+# Pagination [https://github.com/mislav/will_paginate]
+gem 'will_paginate', '~> 4.0'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

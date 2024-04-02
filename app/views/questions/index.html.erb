@@ -1,0 +1,30 @@
+<% content_for :meta_title, "Arbire d'escrime - Questions" %>
+<% content_for :meta_description, "Entraînes-toi avec le type de questions sélectionné" %>
+
+<section data-controller="validate-question" class="w-8/12 mx-auto my-10 text-lg">
+<% @questions.each do |question| %>
+  <h3 class="italic"><%= @count %> questions de niveau <%= question.level %>, catégorie <%= question.category %></h3>
+  <form class="question-index-forms flex flex-col mt-8">
+    <legend class="mb-4"><%= question.statement %> :</legend>
+    <label>
+      <input data-validate-question-target="input" name="question" type="radio" value="<%= question.prop_one %>" data-value="un">
+      <%= question.prop_one %>
+    </label>
+    <label>
+      <input data-validate-question-target="input" name="question" type="radio" value="<%= question.prop_two %>" data-value="deux">
+      <%= question.prop_two %>
+    </label>
+    <label>
+      <input data-validate-question-target="input" name="question" type="radio" value="<%= question.prop_three %>" data-value="trois">
+      <%= question.prop_three %>
+    </label>
+    <button data-action="click->validate-question#showAnswer" data-validate-question-target="btn" class="self-center text-white bg-darkblue text-lg p-2 rounded mt-4" >Valider</button>
+  </form>
+  <div data-validate-question-target="answerdiv" class="hidden">
+    <p data-validate-question-target="goodanswer" class="hidden">La bonne réponse est la réponse <%#= question.answer.good_prop %>.</p>
+    <p data-validate-question-target="explanation" data-value="un<%#= question.answer.good_prop %>"><%#= question.answer.explanation %>bla bla.</p>
+  </div>
+<% end %>
+<%= will_paginate @questions, class: "apple_pagination" %>
+</section>
+

@@ -16,14 +16,91 @@
   </div>
   <!-- au clic sur selectionner des questions -->
   <div data-homepage-btns-target="questionchoice" class="filters-questions hidden">
-    <h2>Choix du type de questions</h2>
-
-
+    <h2 class="font-semibold text-2xl">Choix du type de questions</h2>
+    <%= form_with(url: questions_path, method: 'get', local: true, class: "flex flex-col w-full mt-8") do %>
+        <div class="flex justify-between items-start w-full mb-8">
+          <div class="flex flex-col w-2/5">
+            <h3 class="text-xl mb-4">Catégorie :</h3>
+            <div class="flex flex-col text-lg">
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-category-general", 'Généralités' %>
+                <%= radio_button_tag 'category', 'généralités', false, required: true %>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-category-fleuret", 'Spécifique fleuret' %>
+                <%= radio_button_tag 'category', 'fleuret', false, required: true %>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-category-epee", 'Spécifique épée' %>
+                <%= radio_button_tag 'category', 'épée', false, required: true %>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-category-sabre", 'Spécifique sabre' %>
+                <%= radio_button_tag 'category', 'sabre', false, required: true %>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col w-2/5">
+            <h3 class="text-xl mb-4">Niveau :</h3>
+            <div class="question-level-inputs text-lg">
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-level-dep", 'Départemental' %>
+                <%= radio_button_tag 'level', 'départemental', false, required: true %>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-level-reg", 'Régional' %>
+                <%= radio_button_tag 'level', 'régional', false, required: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-around">
+          <%= submit_tag 'Commencer', class: 'text-white bg-darkblue text-lg p-2 rounded submit-questions-choice ' %>
+          <%= link_to "Annuler", root_path, class: "text-white bg-darkblue text-lg p-2 rounded" %>
+        </div>
+      <% end %>
   </div>
   <!-- au clic sur qcm complet -->
   <div data-homepage-btns-target="qcmchoice" class="filters-questions-qcm hidden">
-    <h2>Choix du type de QCM</h2>
-
+    <h2 class="font-semibold text-2xl">Choix du type de QCM</h2>
+    <%= form_with(url: qcm_path, method: 'get', local: true, class: "flex flex-col w-full mt-8") do %>
+        <div class="flex justify-between items-start w-full mb-8">
+          <div class="flex flex-col w-2/5">
+            <h3 class="text-xl mb-4">Catégorie :</h3>
+            <div class="flex flex-col text-lg">
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-category-fleuret", 'Fleuret' %>
+                <%= radio_button_tag 'category', 'fleuret', false, required: true %>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-category-epee", 'Épée' %>
+                <%= radio_button_tag 'category', 'épée', false, required: true %>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-category-sabre", 'Sabre' %>
+                <%= radio_button_tag 'category', 'sabre', false, required: true %>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col w-2/5">
+            <h3 class="text-xl mb-4">Niveau :</h3>
+            <div class="question-level-inputs text-lg">
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-level-dep", 'Départemental' %>
+                <%= radio_button_tag 'level', 'départemental', false, required: true  %>
+              </div>
+              <div class="flex justify-between items-center w-full">
+                <%= label_tag "questions-level-reg", 'Régional' %>
+                <%= radio_button_tag 'level', 'régional', false, required: true %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-around">
+          <%= submit_tag 'Commencer le qcm', class: 'text-white bg-darkblue text-lg p-2 rounded submit-qcm-choice' %>
+          <%= link_to "Annuler", root_path, class: "text-white bg-darkblue text-lg p-2 rounded" %>
+        </div>
+      <% end %>
 
   </div>
 </section>

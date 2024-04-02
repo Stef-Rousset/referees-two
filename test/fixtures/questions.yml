@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  statement: MyText
+  prop_one: MyText
+  prop_two: MyText
+  prop_three: MyText
+  level: 1
+  category: 1
+  user: one
+
+two:
+  statement: MyText
+  prop_one: MyText
+  prop_two: MyText
+  prop_three: MyText
+  level: 1
+  category: 1
+  user: two
