@@ -35,18 +35,18 @@ class QuestionsController < ApplicationController
     @user = current_user
     @question = Question.new
     @question.user = @user
-    authorize @question
+    #authorize @question
   end
 
   def create
     @user = current_user
     @question = Question.new(question_params)
     @question.user = @user
-    authorize @question
+    #authorize @question
     if @question.save
       redirect_to question_path(@question)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
     if @question.update(question_params)
       redirect_to question_path(@question)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -84,11 +84,11 @@ class QuestionsController < ApplicationController
 
   def set_question
     @question = Question.find(params[:id])
-    authorize @question
+    #authorize @question
   end
 
   def question_params
-    params.require(:question).permit(:statement, :prop_one, :prop_two, :prop_three, :level, :category)
+    params.require(:question).permit(:statement, :prop_one, :prop_two, :prop_three, :level, :category, answer_attributes: [:id, :explanation, :good_prop, :_destroy])
   end
 end
 

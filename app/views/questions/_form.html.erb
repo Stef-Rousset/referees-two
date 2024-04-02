@@ -1,0 +1,58 @@
+<%= form_with model: @question, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' },
+html: { style: "display:flex; flex-direction:column"} do |f| %>
+  <% if @question.errors.any? %>
+    <div class="error-message">
+      <p style="color:red"><%= @question.errors.full_messages.to_sentence.capitalize %></p>
+    </div>
+  <% end %>
+  <p>Niveau :</p>
+  <div class="flex justify-around">
+    <%= f.label :level, "Départemental" %>
+    <%= f.radio_button :level, "départemental" %>
+  </div>
+  <div class="flex justify-around">
+    <%= f.label :level, "Régional" %>
+    <%= f.radio_button :level, "régional" %>
+  </div>
+  <p>Catégorie :</p>
+  <div class="flex justify-around">
+    <%= f.label :category, "Généralités" %>
+    <%= f.radio_button :category, "généralités" %>
+  </div>
+  <div class="flex justify-around">
+    <%= f.label :category, "Fleuret" %>
+    <%= f.radio_button :category, "fleuret" %>
+  </div>
+  <div class="flex justify-around">
+    <%= f.label :category, "Épée" %>
+    <%= f.radio_button :category, "épée" %>
+  </div>
+  <div class="flex justify-around">
+    <%= f.label :category, "Sabre" %>
+    <%= f.radio_button :category, "sabre" %>
+  </div>
+
+  <%= f.label :statement, "Énoncé de la question"%>
+  <%= f.text_field :statement, autofocus: true%>
+  <%= f.label :prop_one, "Réponse une" %>
+  <%= f.text_field :prop_one %>
+  <%= f.label :prop_two, "Réponse deux" %>
+  <%= f.text_field :prop_two %>
+  <%= f.label :prop_three, "Réponse trois" %>
+  <%= f.text_field :prop_three %>
+  <template data-nested-form-target="template">
+    <%= f.fields_for :answer, Answer.new, child_index: 'NEW_RECORD' do |answer_fields| %>
+      <%= render "answer_form", field: answer_fields %>
+    <% end %>
+  </template>
+  <%= f.fields_for :answer do |answer_fields| %>
+    <%= render "answer_form", field: answer_fields %>
+  <% end %>
+  <!-- Inserted elements will be injected before that target. -->
+  <div data-nested-form-target="target"></div>
+
+  <button type="button" data-action="nested-form#add">Add answer</button>
+  <%= f.submit "Valider" %>
+<% end %>
+<%= link_to "Back", :back %>
+

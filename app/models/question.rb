@@ -1,5 +1,8 @@
 class Question < ApplicationRecord
   belongs_to :user
+  has_one :answer, dependent: :destroy
+
+  accepts_nested_attributes_for :answer, allow_destroy: true
 
   validates :level, :category, :statement, :prop_one, :prop_two, :prop_three, presence: true
   validates :statement, length: { minimum: 2}

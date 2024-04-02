@@ -21,8 +21,8 @@
     <button data-action="click->validate-question#showAnswer" data-validate-question-target="btn" class="self-center text-white bg-darkblue text-lg p-2 rounded mt-4" >Valider</button>
   </form>
   <div data-validate-question-target="answerdiv" class="hidden">
-    <p data-validate-question-target="goodanswer" class="hidden">La bonne réponse est la réponse <%#= question.answer.good_prop %>.</p>
-    <p data-validate-question-target="explanation" data-value="un<%#= question.answer.good_prop %>"><%#= question.answer.explanation %>bla bla.</p>
+    <p data-validate-question-target="goodanswer" class="hidden">La bonne réponse est la réponse <%= question.answer.good_prop %>.</p>
+    <p data-validate-question-target="explanation" data-value="<%= question.answer.good_prop %>"><%= question.answer.explanation %>.</p>
   </div>
 <% end %>
 <%= will_paginate @questions, class: "apple_pagination" %>

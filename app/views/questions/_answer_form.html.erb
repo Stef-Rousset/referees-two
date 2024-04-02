@@ -1,0 +1,21 @@
+<div class="nested-form-wrapper" data-new-record="<%= field.object.new_record? %>">
+  <p>Bonne réponse :</p>
+  <div class="flex flex-col">
+    <div class="flex justify-around">
+      <%= field.label :answer_one, "Réponse une"%>
+      <%= field.radio_button :good_prop, "un" %>
+    </div>
+    <div class="flex justify-around">
+      <%= field.label :answer_two, "Réponse deux"%>
+      <%= field.radio_button :good_prop, "deux" %>
+    </div>
+    <div class="flex justify-around">
+      <%= field.label :answer_three, "Réponse trois"%>
+      <%= field.radio_button :good_prop, "trois" %>
+    </div>
+  </div>
+  <%= field.label :explanation, "Explication de la réponse" %>
+  <%= field.text_field :explanation, class: "w-full" %>
+  <button type="button" data-action="nested-form#remove">Remove answer</button>
+  <%= field.hidden_field :_destroy %>
+</div>

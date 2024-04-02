@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get "/ressources", to: "pages#ressources"
   get "qcm", to: "questions#qcm"
-  resources :questions
+  get '/dashboard', to: 'questions#dashboard'
+  resources :questions do
+    resources :answers, only: [:edit, :update]
+  end
 end
