@@ -34,6 +34,8 @@ class QuestionsController < ApplicationController
   def new
     @user = current_user
     @question = Question.new
+    # build associated answer to get it in the form
+    @question.build_answer
     @question.user = @user
     #authorize @question
   end
