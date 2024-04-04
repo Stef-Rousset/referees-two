@@ -1,12 +1,13 @@
 <footer class="flex justify-around items-center bg-darkblue w-screen h-10vh text-white">
-<div class="w-8/12 mx-auto flex">
-  <div class="w-2/5 flex justify-start">
-    <%= link_to "Comité Régional Escrime IDF", "https://escrime-iledefrance.fr", target: :blank %>
-  </div>
-  <div class="w-3/5 flex justify-end">
-    <%= link_to "Escrime IDF Ouest", "http://ligue.leav.fr", target: :blank %>
-    <%= link_to "Escrime IDF Paris", "https://escrimeaparis.fr", class: "ml-6", target: :blank %>
-    <%= link_to "Escrime IDF Est", "https://www.escrime-idfest.fr", class: "ml-6", target: :blank %>
-  </div>
+  <div class="w-full mx-auto grid grid-cols-3">
+    <div class=" flex justify-start ml-8">
+      <%= link_to "Comité Régional Escrime IDF", "https://escrime-iledefrance.fr", target: :blank %>
+    </div>
+    <div class=" flex justify-center">
+      <%= link_to "Escrime IDF Ouest", "http://ligue.leav.fr", target: :blank %>
+      <%= link_to "Escrime IDF Paris", "https://escrimeaparis.fr", class: "ml-6", target: :blank %>
+      <%= link_to "Escrime IDF Est", "https://www.escrime-idfest.fr", class: "ml-6", target: :blank %>
+    </div>
+    <p class="text-end mr-8">Site développé par <%= link_to "Stéphanie Martin-Rousset", "https://www.linkedin.com/in/stephanie-rousset75/", class: 'italic', target: :blank %></p>
   </div>
 </footer>

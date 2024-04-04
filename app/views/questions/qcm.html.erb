@@ -3,7 +3,7 @@
 
 <section data-controller="qcm-results">
   <%= render 'shared/timer' %>
-  <div class="flex flex-col w-8/12 mx-auto my-10 qcm-container">
+  <div data-qcm-results-target="qcmContainer" class="flex flex-col w-8/12 mx-auto my-10">
     <h2 data-qcm-results-target="qcmTitle" data-level="<%= @level %>" class="text-xl font-bold">Qcm <%= @level == "départemental" ? 'départemental' : 'régional' %>
      spécifique
      <% if @category == "fleuret" %>
@@ -65,9 +65,6 @@
     <button data-action="click->qcm-results#handleSubmit" data-qcm-results-target="submitbtn" class="self-center mt-8 text-white bg-darkblue text-lg p-2 rounded validate-qcm">Valider les réponses</button>
     <!-- Lien de retour à l'accueil quand le user a regardé la correction du qcm -->
     <%= link_to "Retour à l'accueil", root_path, data: { qcm_results_target: "homeLink"}, class: "self-center mt-8 text-white bg-darkblue text-lg p-2 rounded hidden" %>
-    <div class="fixed bottom-28 right-8 z-10 invisible">
-      <button class="text-white bg-darkblue text-lg p-2 rounded w-8 p-8"><i class="fas fa-angle-up"></i></button>
-    </div>
     <!-- Modal -->
     <div data-qcm-results-target="modalDiv" class="p-4 hidden z-20 bg-gray-300 text-lg" id="modal_id" tabindex="-1" role="dialog" aria-labelledby="modal_id" aria-hidden="true">
       <div class="modal-dialog" role="document">

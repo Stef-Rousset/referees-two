@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="qcm-results"
 export default class extends Controller {
   static targets = ["submitbtn", "correctionbtn", "qcmTitle", "formGeneral", "formSpecific", "modalDiv", "modalBody",
-                    "answer", "homeLink", "timerDiv", "min", "sec"]
+    "answer", "homeLink", "timerDiv", "min", "sec"]
 
   connect() {
     //console.log(this.element)
@@ -11,6 +11,7 @@ export default class extends Controller {
     //console.log(this.correctionbtnTarget)
     //console.log(this.qcmTitleTarget.dataset.level)
     this.launchTimer()
+    window.addEventListener("scroll", this.showBackToTopBtn)
   }
   handleSubmit(event){
       event.preventDefault
@@ -109,7 +110,6 @@ export default class extends Controller {
       const submitButton = this.submitbtnTarget
       let time;
       level === 'départemental' ? time = 1200 : time = 1800 // nb de min en secondes
-      console.log(time)
       const interval = setInterval(handleTimer, 1000); // intervalle d'1 sec en milliseconds
       function handleTimer() {
           let minutes = parseInt(time / 60, 10);

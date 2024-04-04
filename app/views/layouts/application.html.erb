@@ -13,10 +13,17 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <main class="w-screen h-80vh overflow-scroll bg-gray-100">
+    <main class="w-screen h-80vh overflow-scroll bg-gray-100"
+      <% if controller.action_name == "qcm" %>
+        data-controller="back-to-top" data-action="scroll->back-to-top#showBtn" data-back-to-top-target="mainDiv"
+      <% end %>
+    >
       <%= render 'shared/banner' %>
       <%= render 'shared/flashes' %>
       <%= yield %>
+      <% if controller.action_name == "qcm" %>
+        <button data-action="click->back-to-top#upToTop" data-back-to-top-target="backToTopBtn" class="bg-darkblue text-white p-2 sticky bottom-8 left-[95%] hidden"><i class="fas fa-chevron-up"></i></button>
+      <% end %>
     </main>
     <%= render 'shared/footer' %>
   </body>
