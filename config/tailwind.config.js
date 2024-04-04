@@ -23,6 +23,20 @@ module.exports = {
       backgroundImage:  {
         'banner': "url('banner_draw.png')",
       },
+      keyframes: {
+        modal: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-100%) scale(0.9)' },
+        },
+        modallg: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-60%) scale(0.9)' },
+        },
+      },
+      animation: {
+        modal: 'modal 250ms ease-in-out forwards',
+        modallg: 'modallg 250ms ease-in-out forwards',
+      },
     },
   },
   plugins: [

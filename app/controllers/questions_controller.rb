@@ -16,9 +16,10 @@ class QuestionsController < ApplicationController
   def qcm
     @level = params[:level]
     @category = params[:category]
-    @questions = policy_scope(Question)
-    @questions_generales = @questions.filter_by_level(params[:level]).where(category: 1).shuffle if @level.present?
-    @questions_specifiques = @questions.filter_by_level(params[:level]).filter_by_category(params[:category]).shuffle if @level.present? && @category.present?
+    @questions = Question.all
+    #@questions = policy_scope(Question)
+    @questions_generales = @questions.filter_by_level(@level).where(category: 1).shuffle if @level.present?
+    @questions_specifiques = @questions.filter_by_level(@level).filter_by_category(@category).shuffle if @level.present? && @category.present?
     if @level == 'départemental'
       @questions_generales = @questions_generales.first(12)
       @questions_specifiques = @questions_specifiques.first(8)
@@ -79,7 +80,7 @@ class QuestionsController < ApplicationController
     @questions_reg_f = @questions.reg_f
     @questions_reg_e = @questions.reg_e
     @questions_reg_s = @questions.reg_s
-    authorize @questions
+    #authorize @questions
   end
 
   private
