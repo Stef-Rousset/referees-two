@@ -36,6 +36,9 @@ gem "redis", "~> 4.0"
 # Authentification with devise [https://github.com/heartcombo/devise]
 gem "devise"
 
+# Authorization with pundit []
+gem "pundit"
+
 # Pagination [https://github.com/mislav/will_paginate]
 gem 'will_paginate', '~> 4.0'
 

@@ -5,8 +5,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    #@questions = policy_scope(Question).order(created_at: :desc)
-    @questions = Question.all
+    @questions = policy_scope(Question).order(created_at: :desc)
     @questions = @questions.filter_by_level(params[:level]) if params[:level].present?
     @questions = @questions.filter_by_category(params[:category]) if params[:category].present?
     @count = @questions.length
@@ -16,8 +15,7 @@ class QuestionsController < ApplicationController
   def qcm
     @level = params[:level]
     @category = params[:category]
-    @questions = Question.all
-    #@questions = policy_scope(Question)
+    @questions = policy_scope(Question)
     @questions_generales = @questions.filter_by_level(@level).where(category: 1).shuffle if @level.present?
     @questions_specifiques = @questions.filter_by_level(@level).filter_by_category(@category).shuffle if @level.present? && @category.present?
     if @level == 'départemental'
@@ -38,14 +36,14 @@ class QuestionsController < ApplicationController
     # build associated answer to get it in the form
     @question.build_answer
     @question.user = @user
-    #authorize @question
+    authorize @question
   end
 
   def create
     @user = current_user
     @question = Question.new(question_params)
     @question.user = @user
-    #authorize @question
+    authorize @question
     if @question.save
       redirect_to question_path(@question)
     else
@@ -80,14 +78,14 @@ class QuestionsController < ApplicationController
     @questions_reg_f = @questions.reg_f
     @questions_reg_e = @questions.reg_e
     @questions_reg_s = @questions.reg_s
-    #authorize @questions
+    authorize @questions
   end
 
   private
 
   def set_question
     @question = Question.find(params[:id])
-    #authorize @question
+    authorize @question
   end
 
   def question_params

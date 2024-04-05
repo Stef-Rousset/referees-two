@@ -1,14 +1,15 @@
-<% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-    <%= notice %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
-  </div>
-<% end %>
-<% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-    <%= alert %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
-  </div>
-<% end %>
+<div data-controller="flashes" id="flash"><!-- id flash added for create.turbo_stream -->
+  <% if notice %>
+    <div data-flashes-target="flash" class="flex justify-between items-center absolute z-10 inset-x-40 bg-blue-100 rounded my-8 border-blue-800 border-2 mx-auto p-4 text-blue-800 font-semibold w-6/12 " role="notice">
+      <%= notice %>
+      <button type="button" data-action="click->flashes#close" class="text-blue-600 hover:text-blue-900" aria-label="Close">X</button>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div data-flashes-target="flash" class="flex justify-between items-center absolute z-10 inset-x-40 bg-red-100 rounded border-red-800 border-2 my-8 mx-auto p-4 text-red-800 font-semibold w-6/12" role="alert">
+      <%= alert %>
+      <button type="button" data-action="click->flashes#close" class="text-red-600 hover:text-red-900" aria-label="Close">X</button>
+    </div>
+  <% end %>
+</div>
+
