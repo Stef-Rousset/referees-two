@@ -15,7 +15,8 @@ class QuestionsController < ApplicationController
   def qcm
     @level = params[:level]
     @category = params[:category]
-    @questions = policy_scope(Question)
+    @questions = Question.all
+    authorize @questions
     @questions_generales = @questions.filter_by_level(@level).where(category: 1).shuffle if @level.present?
     @questions_specifiques = @questions.filter_by_level(@level).filter_by_category(@category).shuffle if @level.present? && @category.present?
     if @level == 'départemental'
