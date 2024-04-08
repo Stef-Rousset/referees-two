@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <title>RefereesTwo</title>
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
+    <%= favicon_link_tag "favicon.ico" %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title" content="<%= meta_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= meta_image %>" />
+    <meta property="og:description" content="<%= meta_description %>" />
+    <meta property="og:site_name" content="<%= meta_title %>" />
 
     <%= tag :meta, name: :env, content: EnvPresenter.new.secret_key %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
