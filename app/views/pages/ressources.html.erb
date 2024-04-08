@@ -1,6 +1,6 @@
 <% content_for :meta_title, "Arbitre d'escrime - Ressources" %>
 <% content_for :meta_description, "Tous les documents nécessaires pour réviser la règlementation sur l'escrime" %>
-<section class="w-8/12 mx-auto my-10 text-darkblue">
+<section class="w-11/12 md:w-8/12 mx-auto my-10 text-darkblue">
   <div class="flex flex-col w-full items-start">
       <h2 class="font-bold text-xl">Documentation à consulter</h2>
       <h3 class="my-8 font-semibold text-lg">International</h3>
@@ -11,12 +11,12 @@
       </p>
       <h3 class="my-8 font-semibold text-lg">National</h3>
         <ul class="fa-ul text-lg">
-          <li><span class="fa-li"><i class="fas fa-check"></i></span><a href="https://www.ffescrime.fr/je-suis-en-club/competiteurs/reglements/" target="_blank">Règlements sportifs (saison 2023/2024)</a></li>
-          <li><span class="fa-li"><i class="fas fa-check"></i></span><a href="https://www.ffescrime.fr/je-suis-en-club/arbitres/reglements-arbitrage/" target="_blank">Règlements d'arbitrage (saison 2023/2024)</a></li>
+          <li><span class="fa-li"><i class="fas fa-check"></i></span><%= link_to "Règlements sportifs (saison 2023/2024)", "https://www.ffescrime.fr/je-suis-en-club/competiteurs/reglements/", target: :blank, class: "hover:font-semibold"%></li>
+          <li><span class="fa-li"><i class="fas fa-check"></i></span><%= link_to "Règlements d'arbitrage (saison 2023/2024)", "https://www.ffescrime.fr/je-suis-en-club/arbitres/reglements-arbitrage/", target: :blank, class: "hover:font-semibold"%></li>
         </ul>
       <h3 class="my-8 font-semibold text-lg">IDF</h3>
       <ul class="fa-ul text-lg">
-        <li class="ressources-last-li"><span class="fa-li"><i class="fas fa-check"></i></span><a href="https://escrime-iledefrance.fr/pratiquer-et-sengager/devenir-arbitre-escrime" target="_blank">Devenir arbitre d'escrime</a></li>
+        <li><span class="fa-li"><i class="fas fa-check"></i></span><%= link_to "Devenir arbitre d'escrime", "https://escrime-iledefrance.fr/pratiquer-et-sengager/devenir-arbitre-escrime", target: :blank, class: "hover:font-semibold"%></li>
       </ul>
   </div>
 </section>

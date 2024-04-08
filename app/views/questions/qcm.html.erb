@@ -3,7 +3,7 @@
 
 <section data-controller="qcm-results">
   <%= render 'shared/timer' %>
-  <div data-qcm-results-target="qcmContainer" class="flex flex-col w-8/12 mx-auto my-10">
+  <div data-qcm-results-target="qcmContainer" class="flex flex-col w-11/12 md:w-8/12 mx-auto my-10">
     <h2 data-qcm-results-target="qcmTitle" data-level="<%= @level %>" class="text-xl font-bold">Qcm <%= @level == "départemental" ? 'départemental' : 'régional' %>
      spécifique
      <% if @category == "fleuret" %>
@@ -76,8 +76,8 @@
             </button>
           </div>
           <div data-qcm-results-target="modalBody" class="flex flex-col items-center mb-12"></div>
-          <div class="modal-footer flex justify-between items-center">
-            <button data-qcm-results-target="correctionbtn" data-action="click->qcm-results#handleCorrection" type="button" class="text-white bg-darkblue text-lg p-2 rounded correction-qcm" data-bs-dismiss="modal">Voir la correction du QCM</button>
+          <div class="modal-footer flex flex-col md:flex-row justify-between items-center">
+            <button data-qcm-results-target="correctionbtn" data-action="click->qcm-results#handleCorrection" type="button" class="mb-4 md:mb-0 text-white bg-darkblue text-lg p-2 rounded correction-qcm" data-bs-dismiss="modal">Voir la correction du QCM</button>
             <%= link_to "Retour à la page d'accueil", root_path, class: "text-white bg-darkblue text-lg p-2 rounded" %>
             <!--<button type="button" class="text-white bg-darkblue text-lg p-2 rounded homepage-qcm" data-bs-dismiss="modal">Retour à la page d'accueil</button>-->
           </div>

@@ -29,6 +29,10 @@ class QuestionPolicy < ApplicationPolicy
     record.user == user || user.admin?
   end
 
+  def qcm?
+    true
+  end
+
   def dashboard?
     user.contributor? || user.admin?
   end
