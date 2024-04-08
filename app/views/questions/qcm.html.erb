@@ -1,0 +1,92 @@
+<% content_for :meta_title, "Arbire d'escrime - Qcm" %>
+<% content_for :meta_description, "Qcm d'entraînement chronométré" %>
+
+<section data-controller="qcm-results">
+  <%= render 'shared/timer' %>
+  <div data-qcm-results-target="qcmContainer" class="flex flex-col w-8/12 mx-auto my-10">
+    <h2 data-qcm-results-target="qcmTitle" data-level="<%= @level %>" class="text-xl font-bold">Qcm <%= @level == "départemental" ? 'départemental' : 'régional' %>
+     spécifique
+     <% if @category == "fleuret" %>
+      fleuret
+     <% elsif @category == "épée" %>
+      épée
+      <% else %>
+      sabre
+      <% end %>
+    </h2>
+    <div class="qcm-general-questions text-lg">
+      <h3 class="font-semibold my-8">Questions générales</h3>
+        <% @questions_generales.each_with_index do |question, index| %>
+          <form data-qcm-results-target="formGeneral" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= question.answer.good_prop %>">
+            <legend class="mt-8 italic"><%= question.statement %> :</legend>
+            <label>
+              <input name="question-general-<%= index %>" type="radio" value="un">
+              <%= question.prop_one %>
+            </label>
+            <label>
+              <input name="question-general-<%= index %>" type="radio" value="deux">
+              <%= question.prop_two %>
+            </label>
+            <label>
+              <input name="question-general-<%= index %>" type="radio" value="trois">
+              <%= question.prop_three %>
+            </label>
+            <div data-qcm-results-target="answer" class="italic text-justify mt-4 hidden">
+              <p class="hidden mb-2">La bonne réponse est la réponse <%= question.answer.good_prop %>.</p>
+              <p><%=  question.answer.explanation %>.</p>
+            </div>
+          </form>
+        <% end %>
+    </div>
+    <div class="qcm-specific-questions text-lg">
+      <h3 class="font-semibold my-8">Question spécifiques</h3>
+        <% @questions_specifiques.each_with_index do |question, index| %>
+          <form data-qcm-results-target="formSpecific" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= question.answer.good_prop %>">
+            <legend class="mt-8 italic"><%= question.statement %> :</legend>
+            <label>
+              <input name="question-specific-<%= index %>" type="radio" value="un">
+              <%= question.prop_one %>
+            </label>
+            <label>
+              <input name="question-specific-<%= index %>" type="radio" value="deux">
+              <%= question.prop_two %>
+            </label>
+            <label>
+              <input name="question-specific-<%= index %>" type="radio" value="trois">
+              <%= question.prop_three %>
+            </label>
+            <div data-qcm-results-target="answer" class="italic text-justify mt-4 hidden">
+              <p class="hidden mb-2">La bonne réponse est la réponse <%= question.answer.good_prop %>.</p>
+              <p><%= question.answer.explanation %>.</p>
+            </div>
+          </form>
+        <% end %>
+    </div>
+    <button data-action="click->qcm-results#handleSubmit" data-qcm-results-target="submitbtn" class="self-center mt-8 text-white bg-darkblue text-lg p-2 rounded validate-qcm">Valider les réponses</button>
+    <!-- Lien de retour à l'accueil quand le user a regardé la correction du qcm -->
+    <%= link_to "Retour à l'accueil", root_path, data: { qcm_results_target: "homeLink"}, class: "self-center mt-8 text-white bg-darkblue text-lg p-2 rounded hidden" %>
+    <!-- Modal -->
+    <div data-qcm-results-target="modalDiv" class="p-4 hidden z-20 bg-gray-300 text-lg" id="modal_id" tabindex="-1" role="dialog" aria-labelledby="modal_id" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content flex flex-col ">
+          <div class="flex justify-between items-center mb-4">
+            <h5 class="font-semibold " id="modal_id">Résultat</h5>
+            <button data-action="click->qcm-results#close" type="button" class="text-xl text-white bg-gray-500 rounded px-2" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div data-qcm-results-target="modalBody" class="flex flex-col items-center mb-12"></div>
+          <div class="modal-footer flex justify-between items-center">
+            <button data-qcm-results-target="correctionbtn" data-action="click->qcm-results#handleCorrection" type="button" class="text-white bg-darkblue text-lg p-2 rounded correction-qcm" data-bs-dismiss="modal">Voir la correction du QCM</button>
+            <%= link_to "Retour à la page d'accueil", root_path, class: "text-white bg-darkblue text-lg p-2 rounded" %>
+            <!--<button type="button" class="text-white bg-darkblue text-lg p-2 rounded homepage-qcm" data-bs-dismiss="modal">Retour à la page d'accueil</button>-->
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- fin modal -->
+  </div>
+</section>
+
+

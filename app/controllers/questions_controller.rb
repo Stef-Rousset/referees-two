@@ -5,8 +5,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    #@questions = policy_scope(Question).order(created_at: :desc)
-    @questions = Question.all
+    @questions = policy_scope(Question).order(created_at: :desc)
     @questions = @questions.filter_by_level(params[:level]) if params[:level].present?
     @questions = @questions.filter_by_category(params[:category]) if params[:category].present?
     @count = @questions.length
@@ -17,8 +16,8 @@ class QuestionsController < ApplicationController
     @level = params[:level]
     @category = params[:category]
     @questions = policy_scope(Question)
-    @questions_generales = @questions.filter_by_level(params[:level]).where(category: 1).shuffle if @level.present?
-    @questions_specifiques = @questions.filter_by_level(params[:level]).filter_by_category(params[:category]).shuffle if @level.present? && @category.present?
+    @questions_generales = @questions.filter_by_level(@level).where(category: 1).shuffle if @level.present?
+    @questions_specifiques = @questions.filter_by_level(@level).filter_by_category(@category).shuffle if @level.present? && @category.present?
     if @level == 'départemental'
       @questions_generales = @questions_generales.first(12)
       @questions_specifiques = @questions_specifiques.first(8)
@@ -34,6 +33,8 @@ class QuestionsController < ApplicationController
   def new
     @user = current_user
     @question = Question.new
+    # build associated answer to get it in the form
+    @question.build_answer
     @question.user = @user
     authorize @question
   end
@@ -46,7 +47,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to question_path(@question)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -58,7 +59,7 @@ class QuestionsController < ApplicationController
     if @question.update(question_params)
       redirect_to question_path(@question)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -88,7 +89,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:statement, :prop_one, :prop_two, :prop_three, :level, :category)
+    params.require(:question).permit(:statement, :prop_one, :prop_two, :prop_three, :level, :category, answer_attributes: [:id, :explanation, :good_prop, :_destroy])
   end
 end
 
