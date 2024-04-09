@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
     expect(user.valid?).to eq(true)
   end
 
-  it 'should have a default role of normal when created' do
+  it 'should have a default role of normal when created without role' do
     user = User.create!(email: "marc@gmail.com", password: "test123")
     expect(user.role).to eq("normal")
   end
