@@ -5,10 +5,10 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :answer, allow_destroy: true
 
   validates :level, :category, :statement, :prop_one, :prop_two, :prop_three, presence: true
-  validates :statement, length: { minimum: 2}
-  validates :prop_one, length: { minimum: 2}
-  validates :prop_two, length: { minimum: 2}
-  validates :prop_three, length: { minimum: 2}
+  validates :statement, length: { minimum: 2 }
+  validates :prop_one, length: { minimum: 2 }
+  validates :prop_two, length: { minimum: 2 }
+  validates :prop_three, length: { minimum: 2 }
 
   enum level: { départemental: 1, régional: 2 }
   enum category: { généralités: 1, fleuret: 2, épée: 3, sabre: 4 }
