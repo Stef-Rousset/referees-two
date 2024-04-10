@@ -77,12 +77,27 @@ RSpec.describe QuestionsController, type: :controller do
       assert_redirected_to question_path(Question.last)
     end
 
+    it 'respond with 422 if create fails' do
+      post :create, params: { question: {
+        statement: '', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être',
+        level: 'régional', category: 'fleuret', user_id: @user.id }
+                            }
+      assert_response :unprocessable_entity
+    end
+
     it 'should update a question' do
       put :update, params: { id: @question.id,
                              question: { statement: 'question pertinente' }
                             }
       assert_redirected_to question_path(@question)
       expect(@question.reload.statement).to eq('question pertinente')
+    end
+
+    it 'responds with 422 if update fails' do
+      put :update, params: { id: @question.id,
+                             question: { statement: '' }
+                            }
+      assert_response :unprocessable_entity
     end
 
     it 'should destroy a question' do
