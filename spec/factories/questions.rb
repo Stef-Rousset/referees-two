@@ -32,6 +32,16 @@ FactoryBot.define do
       user_id { }
     end
 
+    trait :dep_g do
+      statement { 'une autre question' }
+      prop_one { 'vrai' }
+      prop_two { 'faux' }
+      prop_three { 'peut être' }
+      level { 'départemental' }
+      category { 'généralités' }
+      user_id { }
+    end
+
     trait :dep_f do
       statement { 'super question' }
       prop_one { 'vrai' }

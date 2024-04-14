@@ -2,7 +2,8 @@
     <div class="flex items-center justify-start">
       <%= image_tag "nav_image.jpg", class: "w-8 h-8 md:w-12 md:h-12 mr-4" %>
       <%= link_to "Accueil", root_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
-      <%= link_to "Ressources", ressources_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+      <%= link_to "Ressources", ressources_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4", id: "ressources_link" %>
+      <!-- id ressources_link for system tests -->
       <%= mail_to "contact@escrime-qcm-arbitrage.com", "Contact", class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
