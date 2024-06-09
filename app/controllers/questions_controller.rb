@@ -28,6 +28,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def missed_questions
+    @questions = Question.join(:failed_questions).where(missed_questions: { user_id: current_user.id })
+    @questions = @questions.paginate(page: params[:page], per_page: 1)
+  end
+
   def show
   end
 
