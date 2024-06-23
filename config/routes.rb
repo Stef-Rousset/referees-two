@@ -11,5 +11,9 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'questions#dashboard'
   resources :questions do
     resources :answers, only: [:edit, :update]
+    member do
+      post 'add_failed_question'
+      delete 'destroy_failed_question'
+    end
   end
 end

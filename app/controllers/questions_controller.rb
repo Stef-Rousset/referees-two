@@ -29,8 +29,28 @@ class QuestionsController < ApplicationController
   end
 
   def missed_questions
-    @questions = Question.join(:failed_questions).where(missed_questions: { user_id: current_user.id })
-    @questions = @questions.paginate(page: params[:page], per_page: 1)
+    @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id })
+    @missed_questions = @missed_questions.paginate(page: params[:page], per_page: 1)
+    @count = @missed_questions.length
+    authorize @missed_questions
+  end
+
+  def add_failed_question
+    @question = Question.find(params[:id])
+    render json: {'error': 'record not found'}, status: 404 if !@question
+
+    if @question && !current_user.failed_questions.include?(@question)
+      current_user.failed_questions << @question
+      render json: nil, status: 200
+    else
+      render json: { "info": 'question already in missed_questions' }, status: 422
+    end
+    authorize Question
+  end
+
+  def destroy_failed_question
+    @question = Question.find(params[:id])
+    current_user.failed_questions.destroy(@question) if @question
   end
 
   def show

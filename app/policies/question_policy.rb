@@ -6,7 +6,7 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def new?
-    true
+    user.contributor? || user.admin?
   end
 
   def show?
@@ -31,6 +31,18 @@ class QuestionPolicy < ApplicationPolicy
 
   def qcm?
     true
+  end
+
+  def missed_questions?
+    user
+  end
+
+  def add_failed_question?
+    user
+  end
+
+  def destroy_failed_question?
+    user
   end
 
   def dashboard?

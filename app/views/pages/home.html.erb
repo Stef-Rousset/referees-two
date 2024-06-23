@@ -10,8 +10,11 @@
     qcm complet chronométré (20 min pour le départemental, 30 minutes pour le régional).</p>
     <p class="italic my-4">Bon entraînement !</p>
     <div class="flex w-full justify-around my-10">
-      <button data-homepage-btns-target="questions" data-action="click->homepage-btns#showQuestions" class="w-2/5 md:w-fit text-white bg-darkblue text-lg p-2 rounded"> Sélectionner des questions</button>
-      <button data-homepage-btns-target="qcm" data-action="click->homepage-btns#showQcm" class="w-2/5 md:w-fit text-white bg-darkblue text-lg p-2 rounded"> QCM complet chronométré</button>
+      <button data-homepage-btns-target="questions" data-action="click->homepage-btns#showQuestions" class="w-2/5 md:w-fit text-white bg-darkblue text-lg p-2 rounded">Sélectionner des questions</button>
+      <button data-homepage-btns-target="qcm" data-action="click->homepage-btns#showQcm" class="w-2/5 md:w-fit text-white bg-darkblue text-lg p-2 rounded">QCM complet chronométré</button>
+      <% if user_signed_in? %>
+        <%= link_to "Revoir les questions où j'ai mal répondu", missed_questions_path, class: "w-2/5 md:w-fit text-white bg-darkblue text-lg p-2 rounded" %>
+      <% end %>
     </div>
   </div>
   <!-- au clic sur selectionner des questions -->
