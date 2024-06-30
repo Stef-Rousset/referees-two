@@ -14,10 +14,10 @@
       sabre
       <% end %>
     </h2>
-    <div class="qcm-general-questions text-lg">
+    <div class="qcm-general-questions text-lg" data-questions-gen="<%= @questions_generales.pluck(:id)%>" >
       <h3 class="font-semibold my-8">Questions générales</h3>
         <% @questions_generales.each_with_index do |question, index| %>
-          <form data-qcm-results-target="formGeneral" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= question.answer.good_prop %>">
+          <form data-qcm-results-target="formGeneral" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= question.answer.good_prop %>" data-question-id=<%= question.id %>>
             <legend class="mt-8 italic"><%= question.statement %> :</legend>
             <label>
               <input name="question-general-<%= index %>" type="radio" value="un">
@@ -38,10 +38,10 @@
           </form>
         <% end %>
     </div>
-    <div class="qcm-specific-questions text-lg">
+    <div class="qcm-specific-questions text-lg" data-questions-spe="<%= @questions_specifiques.pluck(:id)%>">
       <h3 class="font-semibold my-8">Question spécifiques</h3>
         <% @questions_specifiques.each_with_index do |question, index| %>
-          <form data-qcm-results-target="formSpecific" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= question.answer.good_prop %>">
+          <form data-qcm-results-target="formSpecific" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= question.answer.good_prop %>" data-question-id=<%= question.id %>>
             <legend class="mt-8 italic"><%= question.statement %> :</legend>
             <label>
               <input name="question-specific-<%= index %>" type="radio" value="un">

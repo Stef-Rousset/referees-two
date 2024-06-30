@@ -11,6 +11,10 @@ export default class extends Controller {
     //console.log(this.correctionbtnTarget)
     //console.log(this.qcmTitleTarget.dataset.level)
     this.launchTimer()
+    this.questionsGeIds = document.querySelector('.qcm-general-questions').dataset.questionsGen
+    this.questionsSpeIds = document.querySelector('.qcm-specific-questions').dataset.questionsSpe
+    console.log(this.questionsGeIds)
+    console.log(this.questionsSpeIds)
     window.addEventListener("scroll", this.showBackToTopBtn)
   }
   handleSubmit(event){
@@ -28,6 +32,7 @@ export default class extends Controller {
       formsGe.forEach(function (form) {
           let indexForm = form.dataset.index
           let goodAnswer = form.dataset.goodAnswer
+          let questionId = form.dataset.questionId
           const inputs = document.querySelectorAll(`input[name=question-general-${indexForm}]`)
           inputs.forEach(function (input) {
               if (input.checked && goodAnswer === input.value){
@@ -49,6 +54,7 @@ export default class extends Controller {
       formsSpe.forEach(function (form) {
           let indexForm = form.dataset.index
           let goodAnswer = form.dataset.goodAnswer
+          let questionId = form.dataset.questionId
           const inputs = document.querySelectorAll(`input[name=question-specific-${indexForm}]`)
           inputs.forEach(function (input) {
               if (input.checked && goodAnswer === input.value){
@@ -74,6 +80,7 @@ export default class extends Controller {
       //animation de la modal
       modalDiv.classList.add('animate-modal')
       modalDiv.classList.add('lg:animate-modallg')
+      // on met à jour la table de jointure missed_questions
   }
   close() {
     // hide modal
@@ -137,5 +144,33 @@ export default class extends Controller {
             }
           })
       }
+  }
+  addFailedQuestion(questionId) {
+      const url = `questions/${questionId}/add_failed_question`
+      const options = {
+          method: "POST",
+          headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
+          contentType: "application/json",
+          body: new FormData() // on crée un FormObject
+      }
+      fetch(url, options)
+          .then(response => response.json())
+          .then((data) => {
+            console.log(data)
+          })
+  }
+  destroyFailedQuestion(questionId) {
+      const url = `questions/${questionId}/destroy_failed_question`
+      const options = {
+          method: "POST",
+          headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
+          contentType: "application/json",
+          body: new FormData()
+      }
+      fetch(url, options)
+          .then(response => response.json())
+          .then((data) => {
+            console.log(data)
+          })
   }
 }
