@@ -5,8 +5,8 @@
 <% if @missed_questions.blank? %>
   <h3 class="w-full mx-auto text-center mt-24">Il n'y a pas de question à laquelle vous auriez répondu de manière incorrecte, bravo 🙌</h3>
 <% else %>
+  <h3 class="italic font-semibold"><%= @count %> <%= "question".pluralize(@count) %> à revoir</h3>
   <% @missed_questions.each do |question| %>
-    <h3 class="italic"><%= @count %> <%= "question".pluralize(@count) %> à revoir</h3>
     <form data-question-id=<%= question.id %> class="question-index-forms flex flex-col mt-8">
       <legend class="mb-4"><%= question.statement %> :</legend>
       <label>
@@ -28,7 +28,7 @@
       <p data-validate-question-target="explanation" data-value="<%= question.answer.good_prop %>"><%= question.answer.explanation %>.</p>
     </div>
   <% end %>
-  <%= will_paginate @missed_questions, class: "apple_pagination" %>
+  <%= will_paginate @missed_questions, class: "apple_pagination" if @count > 1 %>
 <% end %>
 </section>
 

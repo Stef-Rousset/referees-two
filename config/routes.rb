@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :answers, only: [:edit, :update]
     member do
       post 'add_failed_question'
-      delete 'destroy_failed_question'
+      post 'destroy_failed_question'
     end
   end
 end

@@ -1,8 +1,11 @@
+# frozen_string_literal = true
+
 require 'will_paginate/array' #needed to work with arrays
 
+# controller for questions
 class QuestionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :qcm]
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :add_failed_question, :destroy_failed_question]
 
   def index
     @questions = policy_scope(Question).order(created_at: :desc)
@@ -30,27 +33,27 @@ class QuestionsController < ApplicationController
 
   def missed_questions
     @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id })
-    @missed_questions = @missed_questions.paginate(page: params[:page], per_page: 1)
     @count = @missed_questions.length
+    @missed_questions = @missed_questions.paginate(page: params[:page], per_page: 1) if @count > 1
     authorize @missed_questions
   end
 
   def add_failed_question
-    @question = Question.find(params[:id])
-    render json: {'error': 'record not found'}, status: 404 if !@question
+    return unless @question
 
-    if @question && !current_user.failed_questions.include?(@question)
+    if !current_user.failed_questions.include?(@question)
       current_user.failed_questions << @question
       render json: nil, status: 200
     else
-      render json: { "info": 'question already in missed_questions' }, status: 422
+      render json: { "info": 'question already in missed_questions' }, status: 422 # unprocessable entity
     end
-    authorize Question
   end
 
   def destroy_failed_question
-    @question = Question.find(params[:id])
-    current_user.failed_questions.destroy(@question) if @question
+    return unless @question && current_user.failed_questions.include?(@question)
+
+    current_user.failed_questions.destroy(@question)
+    render json: { "info": 'question deleted from missed_questions' }, status: 200
   end
 
   def show
