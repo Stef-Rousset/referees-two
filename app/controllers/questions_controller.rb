@@ -56,6 +56,40 @@ class QuestionsController < ApplicationController
     render json: { "info": 'question deleted from missed_questions' }, status: 200
   end
 
+  def add_failed_questions
+    authorize Question
+    return unless params[:ids]
+
+    ids = params[:ids].split(',').map(&:to_i)
+
+    if ids.present?
+      ids.each do |id|
+        question = Question.find(id)
+        next if current_user.failed_questions.include?(question)
+
+        current_user.failed_questions << question
+      end
+      render json: { "info": 'questions added in missed_questions' }, status: 200
+    else
+      render json: { "info": 'questions already in missed_questions' }, status: 422 # unprocessable entity
+    end
+  end
+
+  def destroy_failed_questions
+    authorize Question
+    return unless params[:ids]
+
+    ids = params[:ids].split(',').map(&:to_i).select{ |id| current_user.failed_questions.include?(Question.find(id)) }
+    if ids.present?
+      ids.each do |id|
+        current_user.failed_questions.destroy(id)
+      end
+      render json: { "info": 'questions deleted from missed_questions' }, status: 200
+    else
+      render json: { "info": 'no questions to delete from missed_questions' }, status: 200
+    end
+  end
+
   def show
   end
 

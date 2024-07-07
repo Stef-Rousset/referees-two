@@ -6,15 +6,11 @@ export default class extends Controller {
     "answer", "homeLink", "timerDiv", "min", "sec"]
 
   connect() {
-    //console.log(this.element)
-    //console.log(this.submitbtnTarget)
-    //console.log(this.correctionbtnTarget)
-    //console.log(this.qcmTitleTarget.dataset.level)
     this.launchTimer()
-    this.questionsGeIds = document.querySelector('.qcm-general-questions').dataset.questionsGen
-    this.questionsSpeIds = document.querySelector('.qcm-specific-questions').dataset.questionsSpe
-    console.log(this.questionsGeIds)
-    console.log(this.questionsSpeIds)
+    this.token = document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+    this.questionsGeIds = JSON.parse(document.querySelector('.qcm-general-questions').dataset.questionsGen)
+    this.questionsSpeIds = JSON.parse(document.querySelector('.qcm-specific-questions').dataset.questionsSpe)
+    this.questionsQcm = this.questionsGeIds.concat(this.questionsSpeIds)
     window.addEventListener("scroll", this.showBackToTopBtn)
   }
   handleSubmit(event){
@@ -36,7 +32,7 @@ export default class extends Controller {
           const inputs = document.querySelectorAll(`input[name=question-general-${indexForm}]`)
           inputs.forEach(function (input) {
               if (input.checked && goodAnswer === input.value){
-                  arrayGeneral.push(1)
+                  arrayGeneral.push(questionId)
                   input.classList.add('green')
               }
               else if (input.checked && goodAnswer !== input.value){
@@ -47,7 +43,7 @@ export default class extends Controller {
               }
           })
       })
-      // on ajoute 1 ds arraySpecific à chq bonne reponse pr la partie specifique et
+      // on ajoute l'id ds arraySpecific à chq bonne reponse pr la partie specifique et
       // on attribue une class couleur en fonction de bonne ou mauvaise reponse ou
       // pas de reponse
       const formsSpe = this.formSpecificTargets
@@ -58,7 +54,7 @@ export default class extends Controller {
           const inputs = document.querySelectorAll(`input[name=question-specific-${indexForm}]`)
           inputs.forEach(function (input) {
               if (input.checked && goodAnswer === input.value){
-                  arraySpecific.push(1)
+                  arraySpecific.push(questionId)
                   input.classList.add('green')
               }
               else if (input.checked && goodAnswer !== input.value){
@@ -70,8 +66,10 @@ export default class extends Controller {
           })
       })
       // on fait le total des points et on l'affiche dans une modal
-      resultGe = arrayGeneral.reduce((acc, currentV) => acc + currentV, 0)
-      resultSpe = arraySpecific.reduce((acc, currentV) => acc + currentV, 0)
+      //resultGe = arrayGeneral.reduce((acc, currentV) => acc + currentV, 0)
+      //resultSpe = arraySpecific.reduce((acc, currentV) => acc + currentV, 0)
+      resultGe = arrayGeneral.length
+      resultSpe = arraySpecific.length
       total = resultGe + resultSpe
       const content = document.createTextNode(level === 'départemental' ? `Vous avez ${total} bonnes réponses sur 20 questions` : `vous avez ${total} bonnes réponses sur 30 questions`)
       this.modalBodyTarget.appendChild(content)
@@ -81,6 +79,11 @@ export default class extends Controller {
       modalDiv.classList.add('animate-modal')
       modalDiv.classList.add('lg:animate-modallg')
       // on met à jour la table de jointure missed_questions
+      const array = arrayGeneral.concat(arraySpecific)
+      // en ajoutant à la table les mauvauses réponses
+      this.addFailedQuestions(this.questionsQcm.filter(elem => !array.includes(elem)).toString())
+      // en supprimant les bonnes réponses de la table
+      this.destroyFailedQuestions(array.toString())
   }
   close() {
     // hide modal
@@ -145,13 +148,15 @@ export default class extends Controller {
           })
       }
   }
-  addFailedQuestion(questionId) {
-      const url = `questions/${questionId}/add_failed_question`
+  addFailedQuestions(questionIds) {
+      const url = `questions/add_failed_questions`
+    const formData = new FormData() // on crée un FormObject
+      formData.append("ids", `${questionIds}`) // on lui ajoute le params ids
       const options = {
           method: "POST",
           headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
           contentType: "application/json",
-          body: new FormData() // on crée un FormObject
+          body: formData
       }
       fetch(url, options)
           .then(response => response.json())
@@ -159,13 +164,15 @@ export default class extends Controller {
             console.log(data)
           })
   }
-  destroyFailedQuestion(questionId) {
-      const url = `questions/${questionId}/destroy_failed_question`
+  destroyFailedQuestions(questionIds) {
+      const url = `questions/destroy_failed_questions`
+      const formData = new FormData()
+      formData.append("ids", `${questionIds}`)
       const options = {
           method: "POST",
           headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
           contentType: "application/json",
-          body: new FormData()
+          body: formData,
       }
       fetch(url, options)
           .then(response => response.json())

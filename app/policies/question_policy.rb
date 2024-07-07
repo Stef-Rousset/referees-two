@@ -45,6 +45,14 @@ class QuestionPolicy < ApplicationPolicy
     user
   end
 
+  def add_failed_questions?
+    user
+  end
+
+  def destroy_failed_questions?
+    user
+  end
+
   def dashboard?
     user.contributor? || user.admin?
   end

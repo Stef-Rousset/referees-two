@@ -15,5 +15,9 @@ Rails.application.routes.draw do
       post 'add_failed_question'
       post 'destroy_failed_question'
     end
+    collection do
+      post 'add_failed_questions'
+      post 'destroy_failed_questions'
+    end
   end
 end
