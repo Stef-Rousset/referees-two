@@ -66,32 +66,30 @@ export default class extends Controller {
           }
       }
   }
-  addFailedQuestion(){
-      const url = `questions/${this.questionId}/add_failed_question`
-      const options = {
-          method: "POST",
-          headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
-          contentType: "application/json",
-          body: new FormData() // on crée un FormObject
-      }
-      fetch(url, options)
-          .then(response => response.json())
-          .then((data) => {
-            console.log(data)
-          })
+  // permet d'ajouter à la table de jointure une question
+  // à laquelle le user a mal répondu via un call ajax
+  async addFailedQuestion() {
+    const url = `questions/${this.questionId}/add_failed_question`
+    const options = {
+      method: "GET",
+      headers: {"X-CSRF-Token": this.token },
+    }
+    const response = await fetch(url, options);
+    if (response.status == 200) {
+      console.log("ok");
+    }
   }
-  destroyFailedQuestion(){
+  // permet de supprimer de la table de jointure une question
+  // à laquelle le user vient de répondre correctement, via un call ajax
+  async destroyFailedQuestion() {
     const url = `questions/${this.questionId}/destroy_failed_question`
     const options = {
-        method: "POST",
-        headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
-        contentType: "application/json",
-        body: new FormData()
+      method: "GET",
+      headers: {"X-CSRF-Token": this.token },
     }
-    fetch(url, options)
-        .then(response => response.json())
-        .then((data) => {
-          console.log(data)
-        })
+    const response = await fetch(url, options);
+    if (response.status == 200) {
+      console.log("ok");
+    }
   }
 }

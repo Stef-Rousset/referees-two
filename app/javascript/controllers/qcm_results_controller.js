@@ -10,6 +10,7 @@ export default class extends Controller {
     this.token = document.querySelector('meta[name="csrf-token"]').getAttribute("content")
     this.questionsGeIds = JSON.parse(document.querySelector('.qcm-general-questions').dataset.questionsGen)
     this.questionsSpeIds = JSON.parse(document.querySelector('.qcm-specific-questions').dataset.questionsSpe)
+    // questionsQcm est un array contenant tous les ids des questions
     this.questionsQcm = this.questionsGeIds.concat(this.questionsSpeIds)
     window.addEventListener("scroll", this.showBackToTopBtn)
   }
@@ -21,7 +22,7 @@ export default class extends Controller {
       let resultGe;
       let resultSpe;
       let total;
-      // on ajoute 1 ds arrayGeneral à chq bonne reponse pr la partie generale et
+      // on ajoute l'id ds arrayGeneral à chq bonne reponse pr la partie generale et
       // on attribue une class couleur en fonction de bonne ou mauvaise reponse ou
       // pas de réponse
       const formsGe = this.formGeneralTargets
@@ -78,9 +79,12 @@ export default class extends Controller {
       //animation de la modal
       modalDiv.classList.add('animate-modal')
       modalDiv.classList.add('lg:animate-modallg')
-      // on met à jour la table de jointure missed_questions
+      // array correspond aux ids des bonnes réponses aux questions Gé + Spé
       const array = arrayGeneral.concat(arraySpecific)
+      // on met à jour la table de jointure missed_questions
       // en ajoutant à la table les mauvauses réponses
+      // pour avoir les ids des questions où mauvaise réponse, on enlève de
+      // questionsQcm les ids appartenant à array
       this.addFailedQuestions(this.questionsQcm.filter(elem => !array.includes(elem)).toString())
       // en supprimant les bonnes réponses de la table
       this.destroyFailedQuestions(array.toString())
@@ -148,36 +152,38 @@ export default class extends Controller {
           })
       }
   }
-  addFailedQuestions(questionIds) {
-      const url = `questions/add_failed_questions`
-    const formData = new FormData() // on crée un FormObject
-      formData.append("ids", `${questionIds}`) // on lui ajoute le params ids
-      const options = {
-          method: "POST",
-          headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
-          contentType: "application/json",
-          body: formData
-      }
-      fetch(url, options)
-          .then(response => response.json())
-          .then((data) => {
-            console.log(data)
-          })
+  // ajouter à la table de jointure les mauvaises réponses,
+  // via un call ajax
+  async addFailedQuestions(questionIds) {
+    const url = `questions/add_failed_questions`
+    const formData = new FormData()
+    formData.append("ids", `${questionIds}`)
+    const options = {
+      method: "POST",
+      headers: { "X-CSRF-Token": this.token },
+      contentType: "application/json", // type of data sent
+      body: formData,
+    }
+    const response = await fetch(url, options)
+    if (response.status == 200) {
+      console.log("ok")
+    }
   }
-  destroyFailedQuestions(questionIds) {
-      const url = `questions/destroy_failed_questions`
-      const formData = new FormData()
-      formData.append("ids", `${questionIds}`)
-      const options = {
-          method: "POST",
-          headers: { "Accept": "application/json", "X-CSRF-Token": this.token },
-          contentType: "application/json",
-          body: formData,
-      }
-      fetch(url, options)
-          .then(response => response.json())
-          .then((data) => {
-            console.log(data)
-          })
+  // enlever de la table de jointure les réponses correctes,
+  // via un call ajax
+  async destroyFailedQuestions(questionIds) {
+    const url = `questions/destroy_failed_questions`
+    const formData = new FormData()
+    formData.append("ids", `${questionIds}`)
+    const options = {
+      method: "POST",
+      headers: {"X-CSRF-Token": this.token },
+      contentType: "application/json", // type of data sent
+      body: formData,
+    }
+    const response = await fetch(url, options)
+    if (response.status == 200){
+      console.log("ok")
+    }
   }
 }

@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers, only: [:edit, :update]
     member do
-      post 'add_failed_question'
-      post 'destroy_failed_question'
+      get 'add_failed_question'
+      get 'destroy_failed_question'
     end
     collection do
       post 'add_failed_questions'

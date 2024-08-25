@@ -41,19 +41,15 @@ class QuestionsController < ApplicationController
   def add_failed_question
     return unless @question
 
-    if !current_user.failed_questions.include?(@question)
-      current_user.failed_questions << @question
-      render json: nil, status: 200
-    else
-      render json: { "info": 'question already in missed_questions' }, status: 422 # unprocessable entity
-    end
+    current_user.failed_questions << @question if !current_user.failed_questions.include?(@question)
+    head :ok # Returns a response that has no content, with status ok
   end
 
   def destroy_failed_question
-    return unless @question && current_user.failed_questions.include?(@question)
+    return unless @question
 
-    current_user.failed_questions.destroy(@question)
-    render json: { "info": 'question deleted from missed_questions' }, status: 200
+    current_user.failed_questions.destroy(@question) if current_user.failed_questions.include?(@question)
+    head :ok
   end
 
   def add_failed_questions
@@ -61,33 +57,31 @@ class QuestionsController < ApplicationController
     return unless params[:ids]
 
     ids = params[:ids].split(',').map(&:to_i)
-
+    # ids est un array avec ttes les mauvaises réponses au qcm
     if ids.present?
-      ids.each do |id|
-        question = Question.find(id)
-        next if current_user.failed_questions.include?(question)
-
-        current_user.failed_questions << question
-      end
-      render json: { "info": 'questions added in missed_questions' }, status: 200
-    else
-      render json: { "info": 'questions already in missed_questions' }, status: 422 # unprocessable entity
+      # on enlève les ids qui figurent déjà dans les mauvaises réponses
+      # et on ajoute les ids restants à la table de jointure
+      Question.where(id: ids)
+              .reject { |question| current_user.failed_questions.include?(question) }
+              .map { |question| current_user.failed_questions << question }
     end
+    head :ok
   end
 
   def destroy_failed_questions
     authorize Question
     return unless params[:ids]
 
-    ids = params[:ids].split(',').map(&:to_i).select{ |id| current_user.failed_questions.include?(Question.find(id)) }
+    # ids est un array avec ttes les bonnes réponses au qcm
+    ids = params[:ids].split(',').map(&:to_i)
     if ids.present?
-      ids.each do |id|
-        current_user.failed_questions.destroy(id)
-      end
-      render json: { "info": 'questions deleted from missed_questions' }, status: 200
-    else
-      render json: { "info": 'no questions to delete from missed_questions' }, status: 200
+      # on select les ids qui figurent dans la table de jointure
+      # et on les enlève de la table
+      Question.where(id: ids)
+              .select { |question| current_user.failed_questions.include?(question) }
+              .map { |question| current_user.failed_questions.destroy(question) }
     end
+    head :ok
   end
 
   def show
