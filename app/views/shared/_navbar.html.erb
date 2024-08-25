@@ -9,14 +9,23 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <ul data-controller="secret-code" class="flex items-center justify-start w-fit">
+    <!--<ul data-controller="secret-code" class="flex items-center justify-start w-fit"> -->
+    <ul class="flex items-center justify-start w-fit">
       <% if user_signed_in? && (current_user.admin? || current_user.contributor?) %>
         <li><%= link_to "Ajouter une question", new_question_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %></li>
         <li><%= link_to "Voir mes questions", dashboard_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %></li>
         <li><%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %></li>
+      <% elsif user_signed_in? %>
+        <li><%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %></li>
+        <!--<li data-secret-code-target="signin" class="flex justify-between items-center hidden">
+          <%= link_to "Se connecter", new_user_session_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+        </li> -->
       <% else %>
-        <li data-secret-code-target="signin" class="flex justify-between items-center hidden">
-          <%= link_to "Login", new_user_session_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+        <li class="flex justify-between items-center">
+          <%= link_to "Se connecter", new_user_session_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+        </li>
+        <li class="flex justify-between items-center">
+          <%= link_to "Créer un compte", new_user_registration_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
         </li>
       <% end %>
     </ul>
