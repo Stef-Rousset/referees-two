@@ -34,7 +34,6 @@ class QuestionsController < ApplicationController
   def missed_questions
     @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id })
     @count = @missed_questions.length
-    @missed_questions = @missed_questions.paginate(page: params[:page], per_page: 1) if @count > 1
     authorize @missed_questions
   end
 
