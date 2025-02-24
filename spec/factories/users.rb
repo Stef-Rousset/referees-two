@@ -15,5 +15,10 @@ FactoryBot.define do
       password { 'motdepasse' }
       role { 0 }
     end
+
+    trait :contributor do
+      password { 'motdepasse' }
+      role { 1 }
+    end
   end
 end
