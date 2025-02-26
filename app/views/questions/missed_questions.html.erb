@@ -4,7 +4,7 @@
 <section data-controller="missed-results">
   <div class="flex flex-col w-11/12 md:w-8/12 mx-auto my-10">
     <% if @missed_questions.blank? %>
-      <h2 class="w-full mx-auto text-center mt-24">Il n'y a pas de question à laquelle vous auriez répondu de manière incorrecte, bravo 🙌</h2>
+      <h2 class="w-full mx-auto text-center mt-24">Il n'y a pas de questions auxquelles vous auriez répondu de manière incorrecte, bravo 🙌</h2>
       <!-- Lien de retour à l'accueil si pas de mauvaise réponse -->
       <%= link_to "Retour à l'accueil", root_path, class: "self-center mt-8 text-white bg-darkblue text-lg p-2 rounded" %>
     <% else %>
