@@ -1,0 +1,59 @@
+<% content_for :meta_title, "Arbire d'escrime - Questions à revoir" %>
+<% content_for :meta_description, "Entraînes-toi avec des questions auxquelles tu as mal répondu" %>
+
+<section data-controller="missed-results">
+  <div class="flex flex-col w-11/12 md:w-8/12 mx-auto my-10">
+    <% if @missed_questions.blank? %>
+      <h2 class="w-full mx-auto text-center mt-24">Il n'y a pas de questions auxquelles vous auriez répondu de manière incorrecte, bravo 🙌</h2>
+      <!-- Lien de retour à l'accueil si pas de mauvaise réponse -->
+      <%= link_to "Retour à l'accueil", root_path, class: "self-center mt-8 text-white bg-darkblue text-lg p-2 rounded" %>
+    <% else %>
+      <h2 data-missed-results-target="countGeneral" data-count=<%= @count %> class="font-bold text-lg"><%= @count %> <%= "question".pluralize(@count) %> à revoir</h2>
+      <div class="qcm-general-questions text-lg" data-missed-questions="<%= @missed_questions.pluck(:id)%>" >
+        <% @missed_questions.each_with_index do |question, index| %>
+          <form data-missed-results-target="formGeneral" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= question.answer.good_prop %>" data-question-id=<%= question.id %>>
+            <legend class="mt-8 italic"><%= question.statement %> :</legend>
+            <label>
+              <input name="question-general-<%= index %>" type="radio" value="un">
+              <%= question.prop_one %>
+            </label>
+            <label>
+              <input name="question-general-<%= index %>" type="radio" value="deux">
+              <%= question.prop_two %>
+            </label>
+            <label>
+              <input name="question-general-<%= index %>" type="radio" value="trois">
+              <%= question.prop_three %>
+            </label>
+            <div data-missed-results-target="answer" class="italic text-justify mt-4 hidden">
+              <p class="hidden mb-2">La bonne réponse est la réponse <%= question.answer.good_prop %>.</p>
+              <p><%=  question.answer.explanation %>.</p>
+            </div>
+          </form>
+        <% end %>
+      </div>
+      <button data-action="click->missed-results#handleSubmit" data-missed-results-target="submitbtn" class="self-center mt-8 text-white bg-darkblue text-lg p-2 rounded validate-qcm">Valider les réponses</button>
+    <% end %>
+    <%= link_to "Retour à l'accueil", root_path, data: { missed_results_target: "homeLink"}, class: "self-center mt-8 text-white bg-darkblue text-lg p-2 rounded hidden" %>
+    <!-- Modal -->
+    <div data-missed-results-target="modalDiv" class="p-4 hidden z-20 bg-gray-300 text-lg" id="modal_id" tabindex="-1" role="dialog" aria-labelledby="modal_id" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content flex flex-col ">
+          <div class="flex justify-between items-center mb-4">
+            <h5 class="font-semibold " id="modal_id">Résultat</h5>
+            <button data-action="click->qcm-results#close" type="button" class="text-xl text-white bg-gray-500 rounded px-2" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div data-missed-results-target="modalBody" class="flex flex-col items-center mb-12"></div>
+          <div class="modal-footer flex flex-col md:flex-row justify-between items-center">
+            <button data-qcm-results-target="correctionbtn" data-action="click->missed-results#handleCorrection" type="button" class="mb-4 md:mb-0 text-white bg-darkblue text-lg p-2 rounded correction-qcm" data-bs-dismiss="modal">Voir la correction des questions</button>
+            <%= link_to "Retour à la page d'accueil", root_path, class: "text-white bg-darkblue text-lg p-2 rounded" %>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- fin modal -->
+  </div>
+</section>

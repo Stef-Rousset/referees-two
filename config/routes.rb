@@ -1,14 +1,25 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  scope '(:locale)', locale: /fr|en/ do
+    devise_for :users
+    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-  root to: 'pages#home'
-  get "/ressources", to: "pages#ressources"
-  get "qcm", to: "questions#qcm"
-  get '/dashboard', to: 'questions#dashboard'
-  resources :questions do
-    resources :answers, only: [:edit, :update]
+    # Defines the root path route ("/")
+    # root "articles#index"
+    root to: 'pages#home'
+    get "/ressources", to: "pages#ressources"
+    get "qcm", to: "questions#qcm"
+    get "/missed_questions", to: "questions#missed_questions"
+    get '/dashboard', to: 'questions#dashboard'
+    resources :questions do
+      resources :answers, only: [:edit, :update]
+      member do
+        get 'add_failed_question'
+        get 'destroy_failed_question'
+      end
+      collection do
+        post 'add_failed_questions'
+        post 'destroy_failed_questions'
+      end
+    end
   end
 end

@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :user
   has_one :answer, dependent: :destroy
+  has_and_belongs_to_many :failed_questions, class_name: 'User', join_table: 'missed_questions'
 
   accepts_nested_attributes_for :answer, allow_destroy: true
 

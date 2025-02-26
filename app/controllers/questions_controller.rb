@@ -1,8 +1,11 @@
+# frozen_string_literal = true
+
 require 'will_paginate/array' #needed to work with arrays
 
+# controller for questions
 class QuestionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :qcm]
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :add_failed_question, :destroy_failed_question]
 
   def index
     @questions = policy_scope(Question).order(created_at: :desc)
@@ -26,6 +29,58 @@ class QuestionsController < ApplicationController
       @questions_generales = @questions_generales.first(20)
       @questions_specifiques = @questions_specifiques.first(10)
     end
+  end
+
+  def missed_questions
+    @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id })
+    @count = @missed_questions.length
+    authorize @missed_questions
+  end
+
+  def add_failed_question
+    return unless @question
+
+    current_user.failed_questions << @question if !current_user.failed_questions.include?(@question)
+    head :ok # Returns a response that has no content, with status ok
+  end
+
+  def destroy_failed_question
+    return unless @question
+
+    current_user.failed_questions.destroy(@question) if current_user.failed_questions.include?(@question)
+    head :ok
+  end
+
+  def add_failed_questions
+    authorize Question
+    return unless params[:ids]
+
+    ids = params[:ids].split(',').map(&:to_i)
+    # ids est un array avec ttes les mauvaises réponses au qcm
+    if ids.present?
+      # on enlève les ids qui figurent déjà dans les mauvaises réponses
+      # et on ajoute les ids restants à la table de jointure
+      Question.where(id: ids)
+              .reject { |question| current_user.failed_questions.include?(question) }
+              .map { |question| current_user.failed_questions << question }
+    end
+    head :ok
+  end
+
+  def destroy_failed_questions
+    authorize Question
+    return unless params[:ids]
+
+    # ids est un array avec ttes les bonnes réponses au qcm
+    ids = params[:ids].split(',').map(&:to_i)
+    if ids.present?
+      # on select les ids qui figurent dans la table de jointure
+      # et on les enlève de la table
+      Question.where(id: ids)
+              .select { |question| current_user.failed_questions.include?(question) }
+              .map { |question| current_user.failed_questions.destroy(question) }
+    end
+    head :ok
   end
 
   def show

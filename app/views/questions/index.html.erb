@@ -4,7 +4,7 @@
 <section data-controller="validate-question" class="w-11/12 md:w-8/12 mx-auto my-10 text-lg">
 <% @questions.each do |question| %>
   <h3 class="italic"><%= @count %> questions de niveau <%= question.level %>, catégorie <%= question.category %></h3>
-  <form class="question-index-forms flex flex-col mt-8">
+  <form data-question-id=<%= question.id %> class="question-index-forms flex flex-col mt-8">
     <legend class="mb-4"><%= question.statement %> :</legend>
     <label>
       <input data-validate-question-target="input" name="question" type="radio" value="<%= question.prop_one %>" data-value="un">
