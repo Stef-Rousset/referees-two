@@ -22,26 +22,26 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'should not access dashboard' do
       get :dashboard
-      assert_redirected_to new_user_session_path
-      expect(flash[:alert]).to match("You need to sign in or sign up before continuing")
+      assert_redirected_to '/users/sign_in'
+      expect(flash[:alert]).to match("Vous devez vous connecter ou vous inscrire pour continuer")
     end
 
     it 'should not access new' do
       get :new
-      assert_redirected_to new_user_session_path
-      expect(flash[:alert]).to match("You need to sign in or sign up before continuing")
+      assert_redirected_to '/users/sign_in'
+      expect(flash[:alert]).to match("Vous devez vous connecter ou vous inscrire pour continuer")
     end
 
     it 'should not access show' do
       get :show, params: { id: @question }
-      assert_redirected_to new_user_session_path
-      expect(flash[:alert]).to match("You need to sign in or sign up before continuing")
+      assert_redirected_to '/users/sign_in'
+      expect(flash[:alert]).to match("Vous devez vous connecter ou vous inscrire pour continuer")
     end
 
     it 'should not access missed_questions' do
       get :missed_questions
-      assert_redirected_to new_user_session_path
-      expect(flash[:alert]).to match("You need to sign in or sign up before continuing")
+      assert_redirected_to '/users/sign_in'
+      expect(flash[:alert]).to match("Vous devez vous connecter ou vous inscrire pour continuer")
     end
   end
 
@@ -140,25 +140,25 @@ RSpec.describe QuestionsController, type: :controller do
     it 'should not access dashboard' do
       get :dashboard
       assert_redirected_to root_path
-      expect(flash[:alert]).to match("You are not authorized to perform this action")
+      expect(flash[:alert]).to match("Vous n'êtes pas autorisé à réaliser cette action.")
     end
 
     it 'should not access new' do
       get :new
       assert_redirected_to root_path
-      expect(flash[:alert]).to match("You are not authorized to perform this action")
+      expect(flash[:alert]).to match("Vous n'êtes pas autorisé à réaliser cette action.")
     end
 
     it 'should not access edit' do
       get :edit, params: { id: @question }
       assert_redirected_to root_path
-      expect(flash[:alert]).to match("You are not authorized to perform this action")
+      expect(flash[:alert]).to match("Vous n'êtes pas autorisé à réaliser cette action.")
     end
 
     it 'should not access show' do
       get :show, params: { id: @question }
       assert_redirected_to root_path
-      expect(flash[:alert]).to match("You are not authorized to perform this action")
+      expect(flash[:alert]).to match("Vous n'êtes pas autorisé à réaliser cette action.")
     end
 
     it 'should access missed_questions' do

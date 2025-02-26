@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :answer do
 
     trait :valid do
-      explanation { 'bonne réponse' }
+      explanation { 'réponse exacte' }
       good_prop { 'un' }
       question_id { }
     end
