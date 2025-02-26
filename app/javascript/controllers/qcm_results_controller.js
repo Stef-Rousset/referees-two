@@ -72,7 +72,7 @@ export default class extends Controller {
       resultGe = arrayGeneral.length
       resultSpe = arraySpecific.length
       total = resultGe + resultSpe
-      const content = document.createTextNode(level === 'départemental' ? `Vous avez ${total} bonnes réponses sur 20 questions` : `vous avez ${total} bonnes réponses sur 30 questions`)
+      const content = document.createTextNode(level === 'départemental' ? `Vous avez ${total} bonne(s) réponse(s) sur 20 questions` : `vous avez ${total} bonne(s) réponse(s) sur 30 questions`)
       this.modalBodyTarget.appendChild(content)
       const modalDiv = this.modalDivTarget
       modalDiv.classList.toggle("hidden")
