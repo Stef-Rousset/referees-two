@@ -8,6 +8,7 @@ export default class extends Controller {
   connect() {
     this.token = document.querySelector('meta[name="csrf-token"]').getAttribute("content")
     this.count = this.countGeneralTarget.dataset.count
+    console.log(this.count)
     // questionsQcm est un array contenant tous les ids des questions
     this.questionsQcm = JSON.parse(document.querySelector('.qcm-general-questions').dataset.missedQuestions)
     window.addEventListener("scroll", this.showBackToTopBtn)
@@ -39,9 +40,8 @@ export default class extends Controller {
       })
     })
     // on fait le total des points et on l'affiche dans une modal
-    console.log(arrayGeneral)
     resultGe = arrayGeneral.length
-    const content = document.createTextNode(`Vous avez ${resultGe} bonnes réponses sur les ${this.count} questions à revoir`)
+    const content = document.createTextNode(`Vous avez ${resultGe} bonne(s) réponse(s) sur ${this.count} question(s) à revoir`)
     this.modalBodyTarget.appendChild(content)
     const modalDiv = this.modalDivTarget
     modalDiv.classList.toggle("hidden")
