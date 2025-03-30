@@ -46,7 +46,6 @@ RSpec.describe "Questions", type: :system do
     choose("category_g_n_ralit_s") #radio button, with id
     choose("level_d_partemental")
     click_on("Commencer")
-    save_and_open_page
     expect(page).to have_content("questions de niveau départemental, catégorie généralités")
     # il y a 2 questions
     expect(find(".disabled")).to have_text('Précédent') # previous est disabled
