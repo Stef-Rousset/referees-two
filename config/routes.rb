@@ -7,13 +7,20 @@ Rails.application.routes.draw do
 
     # Defines the root path route ("/")
     # root "articles#index"
-    root to: 'pages#home'
+    root to: "pages#home"
+    # with namespace admin, all the resource routes will be prefixed with the same
+    # starting path /admin
+    namespace :admin do
+      get '/', to: "admin#index"
+      resources :questions do
+        resources :answers, only: [:edit, :update]
+      end
+    end
     get "/ressources", to: "pages#ressources"
     get "qcm", to: "questions#qcm"
     get "/missed_questions", to: "questions#missed_questions"
-    get '/dashboard', to: 'questions#dashboard'
-    resources :questions do
-      resources :answers, only: [:edit, :update]
+    #get '/dashboard', to: 'questions#dashboard'
+    resources :questions, only: [:index]  do
       member do
         get 'add_failed_question'
         get 'destroy_failed_question'
