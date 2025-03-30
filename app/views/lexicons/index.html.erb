@@ -1,0 +1,28 @@
+<% content_for :meta_title, "Arbire d'escrime - Questions de Lexique" %>
+<% content_for :meta_description, "Entraînes-toi sur le lexique de l'escrime" %>
+
+<section data-controller="validate-lexicon" class="w-11/12 md:w-8/12 mx-auto my-10 text-lg">
+<% @lexicons.each do |lexicon| %>
+  <form data-lexicon-id=<%= lexicon.id %> class="lexicon-index-forms flex flex-col mt-8">
+    <legend class="mb-4"><%= lexicon.statement %> :</legend>
+    <label>
+      <input data-validate-lexicon-target="input" name="lexicon" type="radio" value="<%= lexicon.prop_one %>" data-value="un">
+      <%= lexicon.prop_one %>
+    </label>
+    <label>
+      <input data-validate-lexicon-target="input" name="lexicon" type="radio" value="<%= lexicon.prop_two %>" data-value="deux">
+      <%= lexicon.prop_two %>
+    </label>
+    <label>
+      <input data-validate-lexicon-target="input" name="lexicon" type="radio" value="<%= lexicon.prop_three %>" data-value="trois">
+      <%= lexicon.prop_three %>
+    </label>
+    <button data-action="click->validate-lexicon#showAnswer" data-validate-lexicon-target="btn" class="self-center text-white bg-darkblue text-lg p-2 rounded mt-4" >Valider</button>
+  </form>
+  <div data-validate-lexicon-target="answerdiv" data-value="<%= lexicon.lexicon_answer.good_prop %>" class="hidden">
+    <p data-validate-lexicon-target="goodanswer" class="hidden">La bonne réponse est la réponse <%= lexicon.lexicon_answer.good_prop %>.</p>
+  </div>
+<% end %>
+<%= will_paginate @lexicons, class: "apple_pagination" %>
+</section>
+
