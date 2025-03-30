@@ -15,11 +15,14 @@ Rails.application.routes.draw do
       resources :questions do
         resources :answers, only: [:edit, :update]
       end
+      resources :lexicons do
+        resources :lexicon_answers, only: [:edit, :update]
+      end
     end
     get "/ressources", to: "pages#ressources"
     get "qcm", to: "questions#qcm"
     get "/missed_questions", to: "questions#missed_questions"
-    #get '/dashboard', to: 'questions#dashboard'
+
     resources :questions, only: [:index]  do
       member do
         get 'add_failed_question'
@@ -30,5 +33,8 @@ Rails.application.routes.draw do
         post 'destroy_failed_questions'
       end
     end
+
+    resources :lexicons, only: [:index]
+    get "lexicon_qcm", to: "lexicon#lexicon_qcm"
   end
 end
