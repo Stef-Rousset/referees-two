@@ -1,4 +1,5 @@
-<%= form_with model: @question, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' },
+<% url = controller.action_name == "new" ? admin_questions_path : admin_question_path %>
+<%= form_with model: @question, url: url, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' },
 html: { style: "display:flex; flex-direction:column;font-size:1rem;"} do |f| %>
   <% if @question.errors.any? %>
     <div class="error-message">
@@ -48,7 +49,7 @@ html: { style: "display:flex; flex-direction:column;font-size:1rem;"} do |f| %>
   <%= f.fields_for :answer do |answer_fields| %>
     <%= render "answer_form", field: answer_fields %>
   <% end %>
-  <%= f.submit "Valider", class: "text-white bg-darkblue text-lg p-2 rounded self-center mt-4" %>
+  <%= f.submit "Valider", class: "text-white bg-darkblue text-lg p-2 rounded self-center mt-4 cursor-pointer" %>
 <% end %>
 <%= link_to "Back", :back, class: "text-white bg-darkblue text-lg p-2 rounded" %>
 

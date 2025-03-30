@@ -9,8 +9,8 @@
   <h4 class="my-8 text-lg">La bonne réponse est la réponse <%= @question.answer.good_prop %>.</h4>
   <p class="text-justify text-lg"><%= @question.answer.explanation %>.</p>
   <div class="flex justify-evenly mt-8">
-    <%= link_to "Modifier",  edit_question_path(@question), class: "text-white bg-darkblue text-lg p-2 rounded" %>
-    <%= link_to "Supprimer", question_path(@question), data: {  turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-white bg-darkblue text-lg p-2 rounded" %>
+    <%= link_to "Modifier",  edit_admin_question_path(@question), class: "text-white bg-darkblue text-lg p-2 rounded" %>
+    <%= link_to "Supprimer", admin_question_path(@question), data: {  turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-white bg-darkblue text-lg p-2 rounded" %>
   </div>
 </div>
 

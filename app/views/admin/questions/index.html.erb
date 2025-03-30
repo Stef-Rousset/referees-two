@@ -4,25 +4,25 @@
       <h4 class="mb-4 font-semibold">Généralités</h4>
         <% @questions_dep_g.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
       <h4 class="mb-4 font-semibold">Fleuret</h4>
         <% @questions_dep_f.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
       <h4 class="mb-4 font-semibold">Épée</h4>
         <% @questions_dep_e.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
       <h4 class="mb-4 font-semibold">Sabre</h4>
         <% @questions_dep_s.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %></li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %></li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
   </div>
@@ -31,25 +31,25 @@
       <h4 class="mb-4 font-semibold">Généralités</h4>
         <% @questions_reg_g.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
       <h4 class="mb-4 font-semibold">Fleuret</h4>
         <% @questions_reg_f.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
       <h4 class="mb-4 font-semibold">Épée</h4>
         <% @questions_reg_e.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
       <h4 class="mb-4 font-semibold">Sabre</h4>
         <% @questions_reg_s.each do |question| %>
           <ul class="flex justify-between items-center ml-4">
-              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, question_path(question), title: "Voir" %>
+              <li><i class="fas fa-check mr-2"></i><%= question.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_question_path(question), title: "Voir" %>
           </ul>
         <% end %>
   </div>
