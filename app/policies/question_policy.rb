@@ -52,8 +52,4 @@ class QuestionPolicy < ApplicationPolicy
   def destroy_failed_questions?
     user
   end
-
-  def dashboard?
-    user.contributor? || user.admin?
-  end
 end
