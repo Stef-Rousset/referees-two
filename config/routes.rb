@@ -34,7 +34,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :lexicons, only: [:index]
-    get "lexicon_qcm", to: "lexicon#lexicon_qcm"
+    resources :lexicons, only: [:index] do
+      # url /lexicons/qcm
+      collection do
+        get "qcm", to: "lexicons#qcm"
+      end
+    end
   end
 end
