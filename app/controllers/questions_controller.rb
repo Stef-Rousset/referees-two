@@ -38,6 +38,8 @@ class QuestionsController < ApplicationController
   end
 
   def add_failed_question
+    authorize Question
+
     return unless @question
 
     current_user.failed_questions << @question if !current_user.failed_questions.include?(@question)
@@ -45,6 +47,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy_failed_question
+    authorize Question
+
     return unless @question
 
     current_user.failed_questions.destroy(@question) if current_user.failed_questions.include?(@question)

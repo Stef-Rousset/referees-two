@@ -11,7 +11,7 @@ class LexiconsController < ApplicationController
     @lexicons = @lexicons.paginate(page: params[:page], per_page: 1)
   end
 
-  def lexicon_qcm
+  def qcm
     lexicon_rules = Lexicon.filter_by_category(:rules).shuffle
     lexicon_actions = Lexicon.filter_by_category(:actions).shuffle
     lexicon_prep = Lexicon.filter_by_category(:prep_hab).shuffle
