@@ -1,0 +1,18 @@
+<div class="nested-form-wrapper" data-new-record="<%#= field.object.new_record? %>">
+  <p class="font-semibold my-4">Bonne réponse :</p>
+  <div class="flex flex-col">
+    <div class="flex justify-between items-center w-1/4">
+      <%= field.label :lexicon_answer_one, "Réponse une", class: "ml-4" %>
+      <%= field.radio_button :good_prop, "un" %>
+    </div>
+    <div class="flex justify-between items-center w-1/4">
+      <%= field.label :lexicon_answer_two, "Réponse deux", class: "ml-4" %>
+      <%= field.radio_button :good_prop, "deux" %>
+    </div>
+    <div class="flex justify-between items-center w-1/4 mb-4">
+      <%= field.label :lexicon_answer_three, "Réponse trois", class: "ml-4" %>
+      <%= field.radio_button :good_prop, "trois" %>
+    </div>
+  </div>
+  <%= field.hidden_field :_destroy %>
+</div>

@@ -1,0 +1,46 @@
+<% url = controller.action_name == "new" ? admin_lexicons_path : admin_lexicon_path %>
+<%= form_with model: @lexicon, url: url, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' },
+html: { style: "display:flex; flex-direction:column;font-size:1rem;"} do |f| %>
+  <% if @lexicon.errors.any? %>
+    <div class="error-message">
+      <p style="color:red"><%= @lexicon.errors.full_messages.to_sentence.capitalize %></p>
+    </div>
+  <% end %>
+  <p class="font-semibold my-4">Catégorie :</p>
+  <div class="flex justify-between items-center w-1/2">
+    <%= f.label :category, "Règles", class: "ml-4" %>
+    <%= f.radio_button :category, "rules" %>
+  </div>
+  <div class="flex justify-between items-center w-1/2">
+    <%= f.label :category, "Actions", class: "ml-4" %>
+    <%= f.radio_button :category, "actions" %>
+  </div>
+  <div class="flex justify-between items-center w-1/2">
+    <%= f.label :category, "Préparations et habiletés", class: "ml-4" %>
+    <%= f.radio_button :category, "prep_hab" %>
+  </div>
+  <div class="flex justify-between items-center w-1/2">
+    <%= f.label :category, "Autre", class: "ml-4" %>
+    <%= f.radio_button :category, "other" %>
+  </div>
+
+  <%= f.label :statement, "Énoncé de la question", class: "mt-4"%>
+  <%= f.text_field :statement, class: "mb-4" %>
+  <%= f.label :prop_one, "Réponse une" %>
+  <%= f.text_field :prop_one, class: "mb-4" %>
+  <%= f.label :prop_two, "Réponse deux"%>
+  <%= f.text_field :prop_two, class: "mb-4" %>
+  <%= f.label :prop_three, "Réponse trois" %>
+  <%= f.text_field :prop_three, class: "mb-4" %>
+  <template data-nested-form-target="template">
+    <%= f.fields_for :lexicon_answer, LexiconAnswer.new, child_index: 'NEW_RECORD' do |lexicon_answer_fields| %>
+      <%= render "lexicon_answer_form", field: lexicon_answer_fields %>
+    <% end %>
+  </template>
+  <%= f.fields_for :lexicon_answer do |lexicon_answer_fields| %>
+    <%= render "lexicon_answer_form", field: lexicon_answer_fields %>
+  <% end %>
+  <%= f.submit "Valider", class: "text-white bg-darkblue text-lg p-2 rounded self-center mt-4 cursor-pointer" %>
+<% end %>
+<%= link_to "Back", :back, class: "text-white bg-darkblue text-lg p-2 rounded" %>
+
