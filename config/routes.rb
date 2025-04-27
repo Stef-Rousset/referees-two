@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         resources :lexicon_answers, only: [:edit, :update]
       end
     end
+
     get "/ressources", to: "pages#ressources"
     get "qcm", to: "questions#qcm"
     get "/missed_questions", to: "questions#missed_questions"

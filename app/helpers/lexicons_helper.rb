@@ -1,4 +1,5 @@
 module LexiconsHelper
+
   def month_beginning
     DateTime.now.day >= 1 && DateTime.now.day < 16 ? true : false
   end
