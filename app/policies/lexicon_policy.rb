@@ -5,6 +5,10 @@ class LexiconPolicy < ApplicationPolicy
     end
   end
 
+  def month_beginning
+    DateTime.now.day >= 1 && DateTime.now.day < 16 ? true : false
+  end
+
   def new?
     user.contributor? || user.admin?
   end
@@ -30,6 +34,6 @@ class LexiconPolicy < ApplicationPolicy
   end
 
   def qcm?
-    true
+    user && (month_beginning && user.intern? || user.admin?)
   end
 end
