@@ -5,7 +5,7 @@
       <!-- id ressources_link for system tests -->
       <%= link_to "Ressources", ressources_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4", id: "ressources_link" %>
       <%= link_to "Lexique", lexicons_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
-      <% if month_beginning && current_user %>
+      <% if current_user && (month_beginning && current_user.intern? || current_user.admin?) %>
         <%= link_to "QCM-Lexique", qcm_lexicons_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
       <% end %>
       <%= mail_to "contact@escrime-qcm-arbitrage.com", "Contact", class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
