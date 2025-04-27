@@ -11,5 +11,23 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe LexiconsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:rules) { create(:lexicon, :rules) }
+  let(:prep_hab) { create(:lexicon, :prep_hab) }
+  let(:other) { create(:lexicon, :other) }
+  let(:actions) { create(:lexicon, :valid)}
+
+  it "month_beginning should return true or false depending on date" do
+    if DateTime.now.day >= 1 && DateTime.now.day < 16
+      expect(month_beginning).to be(true)
+    else
+      expect(month_beginning).to be(false)
+    end
+  end
+
+  it "l_category should return the right category as string" do
+    expect(l_category(rules)).to eq("Règles")
+    expect(l_category(prep_hab)).to eq("Préparations et habiletés")
+    expect(l_category(other)).to eq("Autre")
+    expect(l_category(actions)).to eq("Actions")
+  end
 end

@@ -20,5 +20,10 @@ FactoryBot.define do
       password { 'motdepasse' }
       role { 1 }
     end
+
+    trait :intern do
+      password { 'mdp123'}
+      role { 3 }
+    end
   end
 end
