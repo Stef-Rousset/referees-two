@@ -3,7 +3,7 @@
 require 'will_paginate/array' #needed to work with arrays
 
 class LexiconsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :qcm]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @lexicons = policy_scope(Lexicon)
