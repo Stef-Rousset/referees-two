@@ -37,6 +37,8 @@ export default class extends Controller {
         }
       })
     })
+    // on ajoute le score dans la table LexiconResult
+    this.createLexiconResult(result.length)
     // on affiche le total des points dans une modal
     const content = document.createTextNode(`Vous avez ${result.length} bonne(s) réponse(s) sur 20 questions`)
     this.modalBodyTarget.appendChild(content)
@@ -71,6 +73,25 @@ export default class extends Controller {
     document.querySelector('.qcm-lexicon-container').scrollTop = 0
 
   }
+  // ajouter le score à la table LexiconResult via un call ajax
+  async createLexiconResult(score){
+    const url = `add_lexicon_result`
+    const formData = new FormData()
+    formData.append("score", `${score}`)
+    const options = {
+      method: "POST",
+      headers: { "X-CSRF-Token": this.token },
+      contentType: "application/json", // type of data sent
+      body: formData,
+    }
+    const response = await fetch(url, options)
+    if (response.status == 200) {
+      console.log("ok")
+    }else{
+      console.log("something went wrong...")
+    }
+  }
+
   launchTimer() {
     //lancer le timer
     const timerDiv = this.timerDivTarget
