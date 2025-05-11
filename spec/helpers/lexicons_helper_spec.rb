@@ -11,8 +11,8 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe LexiconsHelper, type: :helper do
-  let(:rules) { create(:lexicon, :rules) }
-  let(:prep_hab) { create(:lexicon, :prep_hab) }
+  let(:basics) { create(:lexicon, :basics) }
+  let(:prep) { create(:lexicon, :prep) }
   let(:other) { create(:lexicon, :other) }
   let(:actions) { create(:lexicon, :valid)}
 
@@ -25,9 +25,9 @@ RSpec.describe LexiconsHelper, type: :helper do
   end
 
   it "l_category should return the right category as string" do
-    expect(l_category(rules)).to eq("Règles")
-    expect(l_category(prep_hab)).to eq("Préparations et habiletés")
-    expect(l_category(other)).to eq("Autre")
+    expect(l_category(basics)).to eq("Bases de l'escrime")
+    expect(l_category(prep)).to eq("Préparations")
+    expect(l_category(other)).to eq("Compétition, règlement, arbitrage")
     expect(l_category(actions)).to eq("Actions")
   end
 end

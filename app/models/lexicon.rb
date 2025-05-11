@@ -9,7 +9,7 @@ class Lexicon < ApplicationRecord
   validates :prop_two, length: { minimum: 2 }
   validates :prop_three, length: { minimum: 2 }
 
-  enum category: { rules: 1, actions: 2, prep_hab: 3, other: 4 }
+  enum category: { basics: 1, actions: 2, prep: 3, other: 4 }
 
 
   def self.filter_by_category(category)

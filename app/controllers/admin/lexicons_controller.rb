@@ -7,9 +7,9 @@ module Admin
 
     def index
       @lexicons = Lexicon.all
-      @lexicons_rules = @lexicons.rules
+      @lexicons_basics = @lexicons.basics
       @lexicons_actions = @lexicons.actions
-      @lexicons_prep = @lexicons.prep_hab
+      @lexicons_prep = @lexicons.prep
       @lexicons_other = @lexicons.other
       authorize([:admin, :lexicon])
     end

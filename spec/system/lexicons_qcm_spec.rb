@@ -5,9 +5,9 @@ RSpec.describe "Lexicon qcm", type: :system do
 
   context "type of lexicons in qcm" do
       let(:intern) { create(:user, :intern) }
-      let!(:rules) { create_list(:lexicon, 5, :rules) }
-      let!(:answers_rules) { build_list(:lexicon_answer, 5, :valid) do |answer, index|
-                                answer.lexicon = rules[index]
+      let!(:basics) { create_list(:lexicon, 8, :basics) }
+      let!(:answers_basics) { build_list(:lexicon_answer, 8, :valid) do |answer, index|
+                                answer.lexicon = basics[index]
                                 answer.save!
                               end
                             }
@@ -17,7 +17,7 @@ RSpec.describe "Lexicon qcm", type: :system do
                               answer.save!
                             end
                           }
-      let!(:prep) { create_list(:lexicon, 10, :prep_hab) }
+      let!(:prep) { create_list(:lexicon, 10, :prep) }
       let!(:answers_prep) { build_list(:lexicon_answer, 10, :valid) do |answer, index|
                               answer.lexicon = prep[index]
                               answer.save!
@@ -33,17 +33,17 @@ RSpec.describe "Lexicon qcm", type: :system do
       sign_in intern
     end
 
-    it 'shows a qcm with 2 rules, 8 actions, 7 prep and 3 other' do
+    it 'shows a qcm with 5 basics, 8 actions, 4 prep and 3 other' do
       visit root_path
       click_link_or_button("QCM-Lexique")
       expect(page).to have_content("Qcm sur le Lexique")
       # verify that there is 2 rules questions
-      expect(page).to have_selector('form[data-category="rules"]', count: 2)
+      expect(page).to have_selector('form[data-category="basics"]', count: 5)
       # ou expect(all('form[data-category="rules"]').count).to eq(2) # find all matching elements and count them
       # verify that there is 8 actions questions
       expect(page).to have_selector('form[data-category="actions"]', count: 8)
       # verify that there is 7 prep questions
-      expect(page).to have_selector('form[data-category="prep_hab"]', count: 7)
+      expect(page).to have_selector('form[data-category="prep"]', count: 4)
       # verify that there is 3 other questions
       expect(page).to have_selector('form[data-category="other"]', count: 3)
     end

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Lexicon, type: :model do
-  let!(:prep_hab) { create(:lexicon, :prep_hab) }
-  let!(:rules) { create(:lexicon, :rules) }
+  let!(:prep) { create(:lexicon, :prep) }
+  let!(:basics) { create(:lexicon, :basics) }
 
   it "is valid" do
     expect(build(:lexicon, :valid)).to be_valid
@@ -17,8 +17,8 @@ RSpec.describe Lexicon, type: :model do
   end
 
   it "renders lexicons from chosen category when filtering by category" do
-    expect(Lexicon.filter_by_category("rules").size).to eq(1)
-    expect(Lexicon.filter_by_category("rules")).not_to include(prep_hab)
-    expect(Lexicon.filter_by_category("rules")).to include(rules)
+    expect(Lexicon.filter_by_category("basics").size).to eq(1)
+    expect(Lexicon.filter_by_category("basics")).not_to include(prep)
+    expect(Lexicon.filter_by_category("basics")).to include(basics)
   end
 end
