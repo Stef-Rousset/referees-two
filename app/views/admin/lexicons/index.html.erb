@@ -2,7 +2,7 @@
   <div class="mb-4">
     <h3 class="mb-4 font-bold text-xl"><%= @lexicons.count %> questions du Lexique</h3>
       <div class="mt-8">
-        <h4 class="mb-2 font-semibold">Règles</h4>
+        <h4 class="mb-2 font-semibold">Bases de l'escrime</h4>
         <p class="mb-4 italic">Catégorie qui regroupe les questions liées aux bases de l'escrime (5 questions / qcm).</p>
           <% @lexicons_basics.each do |lexicon| %>
             <ul class="flex justify-between items-center ml-4">
@@ -20,7 +20,7 @@
           <% end %>
       </div>
       <div class="mt-8">
-        <h4 class="mb-2 font-semibold">Préparations et habiletés</h4>
+        <h4 class="mb-2 font-semibold">Préparations</h4>
         <p class="mb-4 italic">Catégorie qui regroupe les questions liées aux préparations (4 questions / qcm).</p>
           <% @lexicons_prep.each do |lexicon| %>
             <ul class="flex justify-between items-center ml-4">
@@ -29,7 +29,7 @@
           <% end %>
       </div>
       <div class="mt-8">
-        <h4 class="mb-2 font-semibold">Divers</h4>
+        <h4 class="mb-2 font-semibold">Compétition, règlement – arbitrage</h4>
         <p class="mb-4 italic">Catégorie qui regroupe les questions liées à la compétition, règlement, arbitrage (3 questions / qcm).</p>
           <% @lexicons_other.each do |lexicon| %>
             <ul class="flex justify-between items-center ml-4">

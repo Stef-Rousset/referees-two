@@ -13,7 +13,7 @@ module LexiconsHelper
     when "prep"
       "Préparations"
     when "other"
-      "Compétition, règlement, arbitrage"
+      "Compétition, règlement - arbitrage"
     end
   end
 end

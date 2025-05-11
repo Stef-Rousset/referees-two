@@ -27,7 +27,7 @@ RSpec.describe LexiconsHelper, type: :helper do
   it "l_category should return the right category as string" do
     expect(l_category(basics)).to eq("Bases de l'escrime")
     expect(l_category(prep)).to eq("Préparations")
-    expect(l_category(other)).to eq("Compétition, règlement, arbitrage")
+    expect(l_category(other)).to eq("Compétition, règlement - arbitrage")
     expect(l_category(actions)).to eq("Actions")
   end
 end
