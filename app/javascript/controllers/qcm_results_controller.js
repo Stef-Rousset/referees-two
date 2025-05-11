@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="qcm-results"
 export default class extends Controller {
-  static targets = ["submitbtn", "correctionbtn", "qcmTitle", "formGeneral", "formSpecific", "modalDiv", "modalBody",
+  static targets = ["submitbtn", "correctionbtn", "qcmTitle", "qcmContainer", "formGeneral", "formSpecific", "modalDiv", "modalBody",
     "answer", "homeLink", "timerDiv", "min", "sec"]
 
   connect() {
@@ -105,14 +105,15 @@ export default class extends Controller {
       this.answerTargets.forEach(answer => answer.classList.toggle('hidden'))
       inputs.forEach(function (input) {
           if (input.classList.contains('red') || input.classList.contains('blue')) {
-            // on recup le p qui donne la bonne reponse
+            // on recup le p qui dit la bonne reponse est
             input.parentElement.parentElement.lastElementChild.firstElementChild.classList.toggle('hidden')
           }
       })
       this.modalDivTarget.classList.toggle("hidden")
       this.submitbtnTarget.classList.toggle('hidden')
       this.homeLinkTarget.classList.toggle('hidden')
-      document.querySelector('.qcm-container').scrollTop = 0
+      this.qcmContainerTarget.scrollTop = 0
+      //document.querySelector('.qcm-container').scrollTop = 0
 
   }
   launchTimer() {

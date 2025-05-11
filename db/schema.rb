@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_09_161406) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_30_131344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_09_161406) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "lexicon_answers", force: :cascade do |t|
+    t.integer "good_prop", null: false
+    t.bigint "lexicon_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lexicon_id"], name: "index_lexicon_answers_on_lexicon_id"
+  end
+
+  create_table "lexicons", force: :cascade do |t|
+    t.text "statement", null: false
+    t.text "prop_one", null: false
+    t.text "prop_two", null: false
+    t.text "prop_three", null: false
+    t.integer "category", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "missed_questions", id: false, force: :cascade do |t|
@@ -56,5 +74,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_09_161406) do
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "lexicon_answers", "lexicons"
   add_foreign_key "questions", "users"
 end

@@ -11,8 +11,9 @@ user_one = User.create!(
   role: "contributor",
   password: "lknhro;eirthjj095uy4059yu"
 )
-p 'deletings questions and answers'
+p 'deletings questions, lexicons and their answers'
  Question.destroy_all
+ Lexicon.destroy_all
 
 p 'creating 3 questions'
 q_one = Question.create!(statement: "Le tireur qui traîne la pointe de son épée sur la piste s’expose",
@@ -39,7 +40,7 @@ q_three = Question.create!(statement: "Un tireur redresse sa lame sur la piste a
                            category: "sabre"
                           )
 
-p 'creating 3 answers'
+p 'creating 3 answers for questions'
 a_one = Answer.create!( explanation: "Trainer sa pointe sur la piste est une faute du 1er groupe sanctionnée par un carton jaune",
                         good_prop: "trois",
                         question_id: q_one.id
@@ -52,3 +53,26 @@ a_three = Answer.create!(explanation: "Redresser sa lame sur la piste est une fa
                         good_prop: "trois",
                         question_id: q_three.id
                       )
+p 'creating 3 lexicons'
+l_one = Lexicon.create!(statement: "La mesure est",
+                        prop_one: "l’intervalle qui sépare les deux tireurs.",
+                        prop_two: "la distance la plus grande à laquelle un tireur peut atteindre son adversaire en se fendant.",
+                        prop_three: "l’ancien terme de distance.",
+                        category: "prep_hab"
+                        )
+l_two = Lexicon.create!(statement: "L'esquive, c'est",
+                        prop_one: "la manière d’éviter un coup par un déplacement du corps. On trouve parmi elles : petit bonhomme, retraite, in quartata, passata di soto, 1/2 volte",
+                        prop_two: "une action défensive coordonnée avec une contre attaque",
+                        prop_three: "tous types de mouvements rapide du corps permettant de se défendre, à condition de garder au moins un pied au sol",
+                        category: "actions"
+                        )
+l_three = Lexicon.create!(statement: "La stratégie, c'est",
+                        prop_one: "l’ aménagement de la tactique dans l’action",
+                        prop_two: "l’anticipation des réactions de l’adversaire pour en tirer partie",
+                        prop_three: "la planification anticipée de la conduite du match ou de la touche",
+                        category: "other"
+                        )
+p 'creating 3 lexicon_answers'
+la_one = LexiconAnswer.create!(good_prop: "deux", lexicon_id: l_one.id)
+la_two = LexiconAnswer.create!(good_prop: "un", lexicon_id: l_two.id)
+la_three = LexiconAnswer.create!(good_prop: "trois", lexicon_id: l_three.id)

@@ -1,0 +1,41 @@
+<section class="w-8/12 mx-auto my-10 text-lg">
+  <div class="mb-4">
+    <h3 class="mb-4 font-bold text-xl"><%= @lexicons.count %> questions du Lexique</h3>
+      <div class="mt-8">
+        <h4 class="mb-2 font-semibold">Règles</h4>
+        <p class="mb-4 italic">Catégorie qui regroupe les questions liées au Règles du combat (2 questions / qcm).</p>
+          <% @lexicons_rules.each do |lexicon| %>
+            <ul class="flex justify-between items-center ml-4">
+                <li><i class="fas fa-check mr-2"></i><%= lexicon.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_lexicon_path(lexicon), title: "Voir" %>
+            </ul>
+          <% end %>
+      </div>
+      <div class="mt-8">
+        <h4 class="mb-2 font-semibold">Actions</h4>
+        <p class="mb-4 italic">Catégorie qui regroupe les questions liées aux actions offensives, défensives et contre-offensives (8 questions / qcm).</p>
+          <% @lexicons_actions.each do |lexicon| %>
+            <ul class="flex justify-between items-center ml-4">
+                <li><i class="fas fa-check mr-2"></i><%= lexicon.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_lexicon_path(lexicon), title: "Voir" %>
+            </ul>
+          <% end %>
+      </div>
+      <div class="mt-8">
+        <h4 class="mb-2 font-semibold">Préparations et habiletés</h4>
+        <p class="mb-4 italic">Catégorie qui regroupe les questions liées aux préparations, aux déplacements et aux habiletés techniques (7 questions / qcm).</p>
+          <% @lexicons_prep.each do |lexicon| %>
+            <ul class="flex justify-between items-center ml-4">
+                <li><i class="fas fa-check mr-2"></i><%= lexicon.statement.first(100) %>...</li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_lexicon_path(lexicon), title: "Voir" %>
+            </ul>
+          <% end %>
+      </div>
+      <div class="mt-8">
+        <h4 class="mb-2 font-semibold">Divers</h4>
+        <p class="mb-4 italic">Catégorie qui regroupe les questions liées à la stratégie et tactique, aux cibles lignes et positions, et aux caractéristiques du matériel (3 questions / qcm).</p>
+          <% @lexicons_other.each do |lexicon| %>
+            <ul class="flex justify-between items-center ml-4">
+                <li><i class="fas fa-check mr-2"></i><%= lexicon.statement.first(100) %></li><%= link_to '<i class="fas fa-expand"></i>'.html_safe, admin_lexicon_path(lexicon), title: "Voir" %>
+            </ul>
+          <% end %>
+      </div>
+  </div>
+</section>

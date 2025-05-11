@@ -1,7 +1,7 @@
 <div class="flex flex-col w-8/12 mx-auto my-8">
   <h3 class="font-semibold text-2xl">Question de niveau <%= @question.level %>, catégorie <%= @question.category %></h3>
   <h4 class="my-8 text-xl"><%= @question.statement %> :</h4>
-    <ul class="w-full italic text-justify text-lg">
+    <ul class="w-full italic list-decimal list-inside text-justify text-lg">
       <li><%= @question.prop_one %></li>
       <li><%= @question.prop_two %></li>
       <li><%= @question.prop_three %></li>
