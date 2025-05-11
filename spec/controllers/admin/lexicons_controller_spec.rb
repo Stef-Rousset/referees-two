@@ -111,12 +111,12 @@ RSpec.describe Admin::LexiconsController, type: :controller do
     end
 
     it 'should create a lexicon question' do
-      post :create, params: { lexicon: { statement: 'super question', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "rules" } }
+      post :create, params: { lexicon: { statement: 'super question', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "basics" } }
       assert_redirected_to admin_lexicon_path(Lexicon.last)
     end
 
     it 'respond with 422 if create fails' do
-      post :create, params: { lexicon: { statement: '', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "rules" } }
+      post :create, params: { lexicon: { statement: '', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "basics" } }
       assert_response :unprocessable_entity
     end
 
@@ -167,12 +167,12 @@ RSpec.describe Admin::LexiconsController, type: :controller do
     end
 
     it 'should create a lexicon question' do
-      post :create, params: { lexicon: { statement: 'super question', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "rules" } }
+      post :create, params: { lexicon: { statement: 'super question', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "basics" } }
       assert_redirected_to admin_lexicon_path(Lexicon.last)
     end
 
     it 'respond with 422 if create fails' do
-      post :create, params: { lexicon: { statement: '', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "rules" } }
+      post :create, params: { lexicon: { statement: '', prop_one: 'vrai', prop_two: 'faux', prop_three: 'peut être', category: "basics" } }
       assert_response :unprocessable_entity
     end
 

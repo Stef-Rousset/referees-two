@@ -6,7 +6,7 @@ FactoryBot.define do
       prop_one { "une" }
       prop_two { "deux" }
       prop_three { "trois" }
-      category { 2 }
+      category { 2 } # actions
     end
 
     trait :invalid_statement do
@@ -25,7 +25,7 @@ FactoryBot.define do
       category {}
     end
 
-    trait :rules do
+    trait :basics do
       statement { "première règle" }
       prop_one { "règle une" }
       prop_two { "règle deux" }
@@ -33,7 +33,7 @@ FactoryBot.define do
       category { 1 }
     end
 
-    trait :prep_hab do
+    trait :prep do
       statement { "première prep" }
       prop_one { "prep une" }
       prop_two { "prep deux" }

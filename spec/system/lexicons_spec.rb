@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Lexicons", type: :system do
   let(:lexicon) { create(:lexicon, :valid) }
-  let(:rules) { create(:lexicon, :rules) }
+  let(:basics) { create(:lexicon, :basics) }
   let!(:answer) { create(:lexicon_answer, :valid, lexicon: lexicon) }
-  let!(:answer_two) { create(:lexicon_answer, :valid, lexicon: rules) }
+  let!(:answer_two) { create(:lexicon_answer, :valid, lexicon: basics) }
 
   it 'shows good answer in index page when correct answer is selected' do
     visit root_path

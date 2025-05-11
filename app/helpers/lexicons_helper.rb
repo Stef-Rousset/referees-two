@@ -6,14 +6,14 @@ module LexiconsHelper
 
   def l_category(lexicon)
     case lexicon.category
-    when "rules"
-      "Règles"
+    when "basics"
+      "Bases de l'escrime"
     when "actions"
       "Actions"
-    when "prep_hab"
-      "Préparations et habiletés"
+    when "prep"
+      "Préparations"
     when "other"
-      "Autre"
+      "Compétition, règlement, arbitrage"
     end
   end
 end
