@@ -2,12 +2,12 @@
 
 # controller for admin lexicons
 module Admin
-  class LexiconResultsController < ApplicationController
+  class LexiconsResultsController < ApplicationController
 
     def index
-      @results = LexiconResult.all
+      @results = LexiconsResult.all
       @users = User.where(role: "intern")
-      authorize([:admin, :lexicon_result])
+      authorize([:admin, :lexicons_result])
     end
   end
 end

@@ -1,5 +1,5 @@
 module Admin
-  class LexiconResultPolicy < ApplicationPolicy
+  class LexiconsResultPolicy < ApplicationPolicy
     class Scope < Scope
       # NOTE: Be explicit about which records you allow access to!
       # def resolve

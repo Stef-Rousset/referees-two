@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         resources :lexicon_answers, only: [:edit, :update]
       end
 
-      resources :lexicon_results, only: [:index]
+      resources :lexicons_results, only: [:index]
     end
 
     get "/ressources", to: "pages#ressources"

@@ -18,7 +18,7 @@
           <th>Juin</th>
         </tr>
         <% @users.each do |user| %>
-          <% user_results = LexiconResult.results(user.email) %>
+          <% user_results = LexiconsResult.results(user.email) %>
           <tr>
             <td><%= user.email %></td>
             <% if user_results.present? %>
