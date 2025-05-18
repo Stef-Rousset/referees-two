@@ -6,6 +6,12 @@ FactoryBot.define do
       user { nil }
     end
 
+    trait :created_one_month_ago do
+      score { 14 }
+      user { nil }
+      created_at { DateTime.now - 1.month }
+    end
+
     trait :empty_score do
       score { }
       user { nil }
