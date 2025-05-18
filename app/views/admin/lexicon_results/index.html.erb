@@ -1,9 +1,10 @@
 <section class="w-10/12 mx-auto my-10 text-lg">
   <div class="mb-4">
     <h3 class="mb-4 font-bold text-xl">Résultats des QCM de lexique</h3>
-    <% @users.each do |user| %>
-      <% email = user.email %>
-      <table class="w-full">
+    <% if @results.blank? %>
+      <p class="mt-8 italic">Il n'y a pas encore de résultats ...</p>
+    <% else %>
+      <table class="w-full mt-8">
         <tr>
           <th>Email</th>
           <th>Octobre</th>
@@ -16,18 +17,23 @@
           <th>Mai</th>
           <th>Juin</th>
         </tr>
-        <tr>
-          <td><%= email %></td>
-          <td><%= LexiconResult.score(email, 10) %></td>
-          <td><%= LexiconResult.score(email, 11) %></td>
-          <td><%= LexiconResult.score(email, 12) %></td>
-          <td><%= LexiconResult.score(email, 1) %></td>
-          <td><%= LexiconResult.score(email, 2) %></td>
-          <td><%= LexiconResult.score(email, 3) %></td>
-          <td><%= LexiconResult.score(email, 4) %></td>
-          <td><%= LexiconResult.score(email, 5) %></td>
-          <td><%= LexiconResult.score(email, 6) %></td>
-        </tr>
+        <% @users.each do |user| %>
+          <% user_results = LexiconResult.results(user.email) %>
+          <tr>
+            <td><%= user.email %></td>
+            <% if user_results.present? %>
+              <td><%= user_results.month_score(10) %></td>
+              <td><%= user_results.month_score(11) %></td>
+              <td><%= user_results.month_score(12) %></td>
+              <td><%= user_results.month_score(1) %></td>
+              <td><%= user_results.month_score(2) %></td>
+              <td><%= user_results.month_score(3) %></td>
+              <td><%= user_results.month_score(4) %></td>
+              <td><%= user_results.month_score(5) %></td>
+              <td><%= user_results.month_score(6) %></td>
+            <% end %>
+          </tr>
+        <% end %>
       </table>
     <% end %>
   </div>
