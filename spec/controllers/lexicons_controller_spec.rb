@@ -16,6 +16,12 @@ RSpec.describe LexiconsController, type: :controller do
       assert_redirected_to '/users/sign_in'
       expect(flash[:alert]).to match("Vous devez vous connecter ou vous inscrire pour continuer")
     end
+
+    it 'should not access add_lexicon_result' do
+      post :add_lexicon_result, params: { score: 18 }
+      assert_redirected_to '/users/sign_in'
+      expect(flash[:alert]).to match("Vous devez vous connecter ou vous inscrire pour continuer")
+    end
   end
 
   context "signed_in as admin" do
@@ -32,6 +38,11 @@ RSpec.describe LexiconsController, type: :controller do
       get :qcm
       assert_response :success
     end
+
+    it 'should access add_lexicon_result' do
+      post :add_lexicon_result, params: { score: 18 }
+      assert_response :success
+    end
   end
 
   context "sign in as normal user" do
@@ -46,6 +57,11 @@ RSpec.describe LexiconsController, type: :controller do
 
     it 'should not access qcm page' do
       get :qcm
+      expect(flash[:alert]).to match("Vous n'êtes pas autorisé à réaliser cette action.")
+    end
+
+    it 'should not access add_lexicon_result' do
+      post :add_lexicon_result, params: { score: 18 }
       expect(flash[:alert]).to match("Vous n'êtes pas autorisé à réaliser cette action.")
     end
   end
@@ -67,6 +83,11 @@ RSpec.describe LexiconsController, type: :controller do
       else
         expect(flash[:alert]).to match("Vous n'êtes pas autorisé à réaliser cette action.")
       end
+    end
+
+    it 'should access add_lexicon_result' do
+      post :add_lexicon_result, params: { score: 18 }
+      assert_response :success
     end
   end
 end

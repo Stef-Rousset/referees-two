@@ -11,6 +11,17 @@
 }
 
 */
+
+/* add your own default base styles for specific HTML elements */
+@layer base {
+  table, tr, th, td {
+    border: 2px solid black;
+  }
+  th, td {
+    text-align: center;
+  }
+}
+
 .apple_pagination {
   text-align: center;
   padding: 1em;

@@ -19,4 +19,13 @@ class LexiconsController < ApplicationController
     @lexicons = lexicon_basics.first(5) + lexicon_actions.first(8) + lexicon_prep.first(4) + lexicon_other.first(3)
     authorize Lexicon
   end
+
+  def add_lexicon_result
+    authorize Lexicon
+
+    return unless params[:score]
+
+    current_user.lexicon_results.create!(score: params[:score])
+    head :ok
+  end
 end

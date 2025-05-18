@@ -12,12 +12,16 @@ Rails.application.routes.draw do
     # starting path /admin
     namespace :admin do
       get '/', to: "admin#index"
+
       resources :questions do
         resources :answers, only: [:edit, :update]
       end
+
       resources :lexicons do
         resources :lexicon_answers, only: [:edit, :update]
       end
+
+      resources :lexicon_results, only: [:index]
     end
 
     get "/ressources", to: "pages#ressources"
@@ -39,6 +43,7 @@ Rails.application.routes.draw do
       # url /lexicons/qcm
       collection do
         get "qcm", to: "lexicons#qcm"
+        post "add_lexicon_result"
       end
     end
   end

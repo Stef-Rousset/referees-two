@@ -36,4 +36,8 @@ class LexiconPolicy < ApplicationPolicy
   def qcm?
     user && (month_beginning && user.intern? || user.admin?)
   end
+
+  def add_lexicon_result?
+    user.intern? || user.admin?
+  end
 end

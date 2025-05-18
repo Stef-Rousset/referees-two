@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_30_131344) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_11_121024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_30_131344) do
     t.index ["lexicon_id"], name: "index_lexicon_answers_on_lexicon_id"
   end
 
+  create_table "lexicon_results", force: :cascade do |t|
+    t.integer "score"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lexicon_results_on_user_id"
+  end
+
   create_table "lexicons", force: :cascade do |t|
     t.text "statement", null: false
     t.text "prop_one", null: false
@@ -39,6 +47,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_30_131344) do
     t.integer "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lexicons_results", force: :cascade do |t|
+    t.integer "score", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lexicons_results_on_user_id"
   end
 
   create_table "missed_questions", id: false, force: :cascade do |t|
@@ -75,5 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_30_131344) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "lexicon_answers", "lexicons"
+  add_foreign_key "lexicon_results", "users"
+  add_foreign_key "lexicons_results", "users"
   add_foreign_key "questions", "users"
 end
