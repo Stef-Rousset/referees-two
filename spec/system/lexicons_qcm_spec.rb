@@ -1,7 +1,13 @@
 require 'rails_helper'
 
-# to run it when not month_beginning, modify lexicon_policy and condition in navbar
 RSpec.describe "Lexicon qcm", type: :system do
+
+  # redéfinit dans le test le helper car allow ne fonctionne pas
+  module LexiconsHelper
+    def month_beginning
+      true
+    end
+  end
 
   context "type of lexicons in qcm" do
       let(:intern) { create(:user, :intern) }
@@ -31,6 +37,9 @@ RSpec.describe "Lexicon qcm", type: :system do
                           }
     before do
       sign_in intern
+      allow_any_instance_of(LexiconPolicy).to receive(:qcm?).and_return(true)
+      #allow(ApplicationController.helpers).to receive(:month_beginning).and_return(true)
+      #allow(LexiconsHelper).to receive(:month_beginning).and_return(true)
     end
 
     it 'shows a qcm with 5 basics, 8 actions, 4 prep and 3 other' do
@@ -56,6 +65,7 @@ RSpec.describe "Lexicon qcm", type: :system do
 
     before do
       sign_in intern
+      allow_any_instance_of(LexiconPolicy).to receive(:qcm?).and_return(true)
     end
 
     context "when valid answer" do
