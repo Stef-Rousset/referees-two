@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe "Lexicon Results", type: :system do
+RSpec.describe "Lexicons Results", type: :system do
   let(:admin) { create(:user, :admin)}
   let(:user) { create(:user, :intern) }
   let(:second_user) { create(:user, :intern) }
-  let!(:lexicon_result_one) { create(:lexicon_result, :valid, user: user) }
-  let!(:lexicon_result_two) { create(:lexicon_result, :created_one_month_ago, user: user) }
-  let!(:lexicon_result_three) { create(:lexicon_result, :valid, user: second_user) }
-  let!(:lexicon_result_four) { create(:lexicon_result, :created_one_month_ago, user: second_user) }
+  let!(:lexicons_result_one) { create(:lexicons_result, :valid, user: user) }
+  let!(:lexicons_result_two) { create(:lexicons_result, :created_one_month_ago, user: user) }
+  let!(:lexicons_result_three) { create(:lexicons_result, :valid, user: second_user) }
+  let!(:lexicons_result_four) { create(:lexicons_result, :created_one_month_ago, user: second_user) }
 
   before do
     sign_in admin
   end
 
   it 'shows a table with 2 lines' do
-    visit admin_lexicon_results_path
+    visit admin_lexicons_results_path
     trs = page.all('tr')
     expect(trs.count).to eq(3) # 1 tr pour les headers, et 2 tr pr les 2 users
     tds = page.all('td')

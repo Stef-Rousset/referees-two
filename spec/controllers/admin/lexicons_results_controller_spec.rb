@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Admin::LexiconResultsController, type: :controller do
+RSpec.describe Admin::LexiconsResultsController, type: :controller do
   let(:user) { create(:user, :admin) }
   let(:contributor) { create(:user, :contributor) }
   let(:normal) { create(:user, :normal) }
   let(:intern) { create(:user, :intern) }
-  let(:lexicon) { create(:lexicon, :valid) }
+
 
   context 'not signed in' do
     it 'should not access index' do

@@ -25,7 +25,7 @@ class LexiconsController < ApplicationController
 
     return unless params[:score]
 
-    current_user.lexicon_results.create!(score: params[:score])
+    current_user.lexicons_results.create!(score: params[:score])
     head :ok
   end
 end

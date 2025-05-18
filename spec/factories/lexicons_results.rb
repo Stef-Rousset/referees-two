@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :lexicon_result do
+  factory :lexicons_result do
 
     trait :valid do
       score { 18 }
