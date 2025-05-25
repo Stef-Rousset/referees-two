@@ -4,7 +4,7 @@
     <% if @results.blank? %>
       <p class="mt-8 italic">Il n'y a pas encore de résultats ...</p>
     <% else %>
-      <table class="w-full mt-8">
+      <table class="w-full my-8">
         <tr>
           <th>Email</th>
           <th>Octobre</th>
@@ -36,5 +36,6 @@
         <% end %>
       </table>
     <% end %>
+    <%= link_to "Télécharger les résultats au format excel", admin_lexicons_results_path(format: :xlsx), class: "mb-8 font-semibold text-lg hover:underline" %>
   </div>
 </section>
