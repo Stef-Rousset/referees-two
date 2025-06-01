@@ -13,6 +13,10 @@ RSpec.describe "Lexicons Results", type: :system do
     sign_in admin
   end
 
+  after do
+    File.delete("/Users/stephanierousset/Downloads/Résultats_lexique_2025_2026.xlsx") if File.exist?("/Users/stephanierousset/Downloads/Résultats_lexique_2025_2026.xlsx")
+  end
+
   it 'shows a table with 2 lines' do
     visit admin_lexicons_results_path
     trs = page.all('tr')
@@ -27,4 +31,20 @@ RSpec.describe "Lexicons Results", type: :system do
     expect(eighteen_scores).to eq(2) # valid result score is 18
     expect(fourteen_scores).to eq(2) # created_one_month_ago result score is 14
   end
+
+  it 'downloads a file when clicking on download file link' do
+    # count the numbers of files in downloads
+    path = "/Users/stephanierousset/Downloads/*"
+    count = Dir[path].length
+
+    visit admin_lexicons_results_path
+    click_on "Télécharger les résultats au format excel"
+    # no error after click on link
+    expect(page).to have_content("Résultats des QCM de lexique")
+    # check that one file has been downloaded
+    expect(Dir[path].length).to eq(count + 1)
+    # Dir[path] is an array of all the files paths included in downloads
+    expect(Dir[path]).to include("/Users/stephanierousset/Downloads/Résultats_lexique_2025_2026.xlsx")
+  end
 end
+
