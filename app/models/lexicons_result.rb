@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: lexicons_results
+#
+#  id         :bigint           not null, primary key
+#  score      :integer          not null
+#  user_id    :bigint           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class LexiconsResult < ApplicationRecord
   belongs_to :user
 

@@ -60,7 +60,7 @@ gem "bootsnap", require: false
 # gem for execel files [https://github.com/caxlsx/caxlsx_rails]
 gem 'caxlsx'
 gem 'caxlsx_rails'
-
+gem 'concurrent-ruby', '1.3.4'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -86,6 +86,12 @@ group :development do
   gem 'letter_opener_web', '~> 3.0'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
+
+  # improve queries [https://github.com/flyerhzm/bullet]
+  gem 'bullet'
+
+  # annotate models [https://github.com/ctran/annotate_models]
+  gem 'annotate'
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
