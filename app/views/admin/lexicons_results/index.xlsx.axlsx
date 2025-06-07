@@ -1,0 +1,38 @@
+wb = xlsx_package.workbook
+
+s = wb.styles
+# bg color blue-green, font style bold, center in the cell, font size 20
+title = s.add_style(bg_color: "aad8d3",
+                     b: true,
+                     alignment: { horizontal: :center },
+                     sz: 20
+                    )
+# bg color light grey, font style bold, center in the cell, font size 18, border thin black
+header = s.add_style(bg_color: "f7f8fa",
+                     b: true,
+                     alignment: { horizontal: :center },
+                     sz: 18,
+                     border: { style: :thin, color: '000000' }
+                    )
+# center in the cell, font size 16, border thin black
+cell = s.add_style(alignment: { horizontal: :left },
+                   sz: 16,
+                   border: { style: :thin, color: '000000' }
+                   )
+
+wb.add_worksheet(name: "Résultats_QCM_Lexique") do |sheet|
+  sheet.add_row ["Résultats du QCM sur le Lexique 2025-2026"], style: title
+  sheet.add_row
+  sheet.add_row ["Email", "Octobre", "Novembre", "Décembre", "Janvier", "Février", "Mars", "Avril", "Mai", "Juin"], style: header
+  @users.each do |user|
+    user_results = LexiconsResult.results(user.email)
+    sheet.add_row [user.email, user_results.month_score(10), user_results.month_score(11), user_results.month_score(12), user_results.month_score(1),
+                   user_results.month_score(2), user_results.month_score(3), user_results.month_score(4), user_results.month_score(5),
+                   user_results.month_score(6) ], style: cell
+  end
+
+  # merge title cells
+  sheet.merge_cells('A1:J1')
+  # fix columns width
+  sheet.column_widths 40, 20, 20, 20, 20, 20, 20, 20, 20, 20
+end

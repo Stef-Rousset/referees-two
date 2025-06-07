@@ -9,7 +9,7 @@
       <h3 class="font-semibold my-8">20 questions en 20 minutes</h3>
         <% @lexicons.each_with_index do |lexicon, index| %>
           <form data-qcm-lexicon-target="formGeneral" class="flex flex-col text-justify" data-index="<%= index %>" data-good-answer="<%= lexicon.lexicon_answer.good_prop %>" data-lexicon-id=<%= lexicon.id %> data-category=<%= lexicon.category %>>
-            <legend class="mt-8 italic"><%= lexicon.statement %> :</legend>
+            <legend class="mt-8 italic"><%= lexicon.statement %></legend>
             <label>
               <input name="lexicon-general-<%= index %>" type="radio" value="un">
               <%= lexicon.prop_one %>
