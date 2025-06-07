@@ -36,6 +36,8 @@
         <% end %>
       </table>
     <% end %>
-    <%= link_to "Télécharger les résultats au format excel", admin_lexicons_results_path(format: :xlsx), class: "mb-8 font-semibold text-lg hover:underline" %>
+    <% if @results.present? %>
+      <%= link_to "Télécharger les résultats au format excel", admin_lexicons_results_path(format: :xlsx), class: "mb-8 font-semibold text-lg hover:underline" %>
+    <% end %>
   </div>
 </section>
