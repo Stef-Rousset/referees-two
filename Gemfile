@@ -76,6 +76,12 @@ group :development, :test do
 
   # factory bot [https://github.com/thoughtbot/factory_bot_rails]
   gem "factory_bot_rails"
+
+  # improve queries [https://github.com/flyerhzm/bullet]
+  gem 'bullet'
+
+  # annotate models [https://github.com/ctran/annotate_models]
+  gem 'annotate'
 end
 
 group :development do
@@ -86,12 +92,6 @@ group :development do
   gem 'letter_opener_web', '~> 3.0'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
-
-  # improve queries [https://github.com/flyerhzm/bullet]
-  gem 'bullet'
-
-  # annotate models [https://github.com/ctran/annotate_models]
-  gem 'annotate'
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
