@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def missed_questions
-    @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id })
+    @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id }).includes(:answer)
     @count = @missed_questions.length
     authorize @missed_questions
   end
