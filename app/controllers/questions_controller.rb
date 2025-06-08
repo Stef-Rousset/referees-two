@@ -18,7 +18,7 @@ class QuestionsController < ApplicationController
   def qcm
     @level = params[:level]
     @category = params[:category]
-    @questions = Question.all
+    @questions = Question.all.includes(:answer)
     authorize @questions
     @questions_generales = @questions.filter_by_level(@level).where(category: 1).shuffle if @level.present?
     @questions_specifiques = @questions.filter_by_level(@level).filter_by_category(@category).shuffle if @level.present? && @category.present?
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def missed_questions
-    @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id })
+    @missed_questions = Question.joins(:failed_questions).where(missed_questions: { user_id: current_user.id }).includes(:answer)
     @count = @missed_questions.length
     authorize @missed_questions
   end

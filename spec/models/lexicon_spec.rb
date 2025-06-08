@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: lexicons
+#
+#  id         :bigint           not null, primary key
+#  statement  :text             not null
+#  prop_one   :text             not null
+#  prop_two   :text             not null
+#  prop_three :text             not null
+#  category   :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe Lexicon, type: :model do

@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: answers
+#
+#  id          :bigint           not null, primary key
+#  explanation :text             not null
+#  good_prop   :integer          not null
+#  question_id :bigint           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 FactoryBot.define do
 
   factory :answer do

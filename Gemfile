@@ -60,7 +60,7 @@ gem "bootsnap", require: false
 # gem for execel files [https://github.com/caxlsx/caxlsx_rails]
 gem 'caxlsx'
 gem 'caxlsx_rails'
-
+gem 'concurrent-ruby', '1.3.4'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -76,6 +76,12 @@ group :development, :test do
 
   # factory bot [https://github.com/thoughtbot/factory_bot_rails]
   gem "factory_bot_rails"
+
+  # improve queries [https://github.com/flyerhzm/bullet]
+  gem 'bullet'
+
+  # annotate models [https://github.com/ctran/annotate_models]
+  gem 'annotate'
 end
 
 group :development do
