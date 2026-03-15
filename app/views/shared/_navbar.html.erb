@@ -10,19 +10,14 @@
       <% end %>
       <%= mail_to "contact@escrime-qcm-arbitrage.com", "Contact", class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
     </div>
-    <!--<ul data-controller="secret-code" class="flex items-center justify-start w-fit"> -->
-    <ul class="flex items-center justify-center h-8 lg:h-12 xl:justify-start w-fit">
+    <ul data-controller="secret-code" class="flex items-center justify-start w-fit">
+    <!--<ul class="flex items-center justify-center h-8 lg:h-12 xl:justify-start w-fit">-->
       <% if user_signed_in? && (current_user.admin? || current_user.contributor?) %>
         <li><%= link_to "Dashboard", admin_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %></li>
         <li><%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %></li>
-      <% elsif user_signed_in? %>
-        <li><%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %></li>
       <% else %>
-        <li class="flex justify-between items-center">
-          <%= link_to "Connexion", new_user_session_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
-        </li>
-        <li class="flex justify-between items-center">
-          <%= link_to "Créer un compte", new_user_registration_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
+        <li data-secret-code-target="signin" class="flex justify-between items-center hidden">
+          <%= link_to "Login", new_user_session_path, class: "text-darkblue text-xl hover:text-gray-500 hover:font-semibold mr-4" %>
         </li>
       <% end %>
     </ul>
